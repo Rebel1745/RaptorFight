@@ -17,6 +17,10 @@ public class RaptorController : MonoBehaviour
 
     private void Start()
     {
+        currentSpeed = Speed;
+
+        jumpsLeft = NumberOfJumps;
+        dashesLeft = NumberOfDashes;
     }
 
     private void OnEnable()
@@ -31,19 +35,23 @@ public class RaptorController : MonoBehaviour
     #endregion
 
     #region Variables
-    [HideInInspector]
     Rigidbody rb;
     PlayerControls pc;
+    
+    [Header("Abilities")]
+    public bool CanGroundSlam = false;
+    public bool CanDash = false;
+    public bool CanSprint = false;
+    public bool CanFly = false;
 
+    [Space]
     [Header("Movement")]
+    private bool canMove = true;
+    public float Speed = 3f;
+    public float SprintSpeed = 4f;
+    float currentSpeed;
     Vector2 moveInput;
     bool isFacingRight = true;
-    bool canMove = true;
-    public bool CanSprint = false;
-
-    public float Speed = 5f;
-    public float SprintSpeed = 10f;
-    float currentSpeed = 0f;
 
     [Space]
     [Header("Jumping")]
@@ -59,34 +67,118 @@ public class RaptorController : MonoBehaviour
     public LayerMask WhatIsGround;
     public float GroundedRememberTime = 0.1f;
     float groundedRemember = 0;
-    float startGravityScale;
+
+    [Space]
+    [Header("Ground Slam")]
+    public float GroundSlamSpeed = 20f;
+    public float PreSlamHoverTime = 1f;
+    public float SlamMinHeight = 2f;
+    bool isGroundSlam = false;
+
+    [Space]
+    [Header("Dashing")]
+    bool isDashing = false;
+    public float DashSpeed = 50f;
+    public int NumberOfDashes = 1;
+    int dashesLeft;
+    public float DashDuration = 0.1f;
+
+    [Space]
+    [Header("Flying / gliding")]
+    public float FlyUpForce = 0.5f; // low number for glide, high to fly
+    public float FlyingCooldownTime = 0.1f;
+    float flyingCooldown;
     #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        moveInput = pc.Land.Movement.ReadValue<Vector2>().normalized;
-        DoJumping();
-    }
-
+    #region Update Funtions
     private void FixedUpdate()
     {
         DoMovement();
     }
 
+    private void Update()
+    {
+        DoJumping();
+        DoDashing();
+        DoFlying();
+        CheckGroundSlam();
+        moveInput = pc.Land.Movement.ReadValue<Vector2>().normalized;
+    }
+    #endregion
+
+    #region Ground Slam
+    void CheckGroundSlam()
+    {
+        if (isGrounded)
+            isGroundSlam = false;
+
+        if (!CanGroundSlam && isGroundSlam)
+            return;
+        
+
+        if(!Physics.Raycast(GroundCheck.position, Vector3.down, out RaycastHit hit, SlamMinHeight, WhatIsGround) && pc.Land.Crouch.triggered)
+        {
+            isGroundSlam = true;
+            // stay static 
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
+            Invoke("DoGroundSlam", PreSlamHoverTime);
+        }
+            
+    }
+
+    void DoGroundSlam()
+    {
+        rb.useGravity = true;
+        rb.velocity = new Vector2(0f, Mathf.Abs(GroundSlamSpeed) * -1);
+    }
+    #endregion
+
+    #region Flying
+    void DoFlying()
+    {
+        if (flyingCooldown > 0)
+            flyingCooldown -= Time.deltaTime;
+
+        // check to see if we are falling
+        if (CanFly && jumpsLeft == 0 && !isGrounded && rb.velocity.y < 0 && flyingCooldown <= 0)
+        {
+            if (pc.Land.Jump.triggered)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, FlyUpForce);
+                flyingCooldown = FlyingCooldownTime;
+            }
+        }
+    }
+    #endregion
+
+    #region Dashing
+    void DoDashing()
+    {
+        if (CanDash && dashesLeft > 0 && !isDashing && (pc.Land.DashLeft.triggered || pc.Land.DashRight.triggered))
+        {
+            isDashing = true;
+            Vector2 dir;
+            dir = pc.Land.DashRight.triggered ? Vector2.right : Vector2.left;
+            rb.velocity = dir * DashSpeed;
+            dashesLeft--;
+
+            Invoke("StopDash", DashDuration);
+        }
+    }
+
+    void StopDash()
+    {
+        isDashing = false;
+        currentSpeed = Speed;
+    }
+    #endregion
+
     #region Jumping
     void DoJumping()
     {
         // if we are on the ground, we can jump
-        if (Physics.Raycast(GroundCheck.position, Vector2.down, CheckRadius, WhatIsGround))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-
+        isGrounded = Physics.Raycast(GroundCheck.position, Vector2.down, CheckRadius, WhatIsGround);
         groundedRemember -= Time.deltaTime;
 
         if (isGrounded)
@@ -98,6 +190,7 @@ public class RaptorController : MonoBehaviour
         if (isGrounded)
         {
             jumpsLeft = NumberOfJumps;
+            dashesLeft = NumberOfDashes;
         }
 
         if (((groundedRemember > 0 && canJump) || jumpsLeft > 0) && pc.Land.Jump.triggered)
@@ -129,7 +222,7 @@ public class RaptorController : MonoBehaviour
     #region Movement
     void DoMovement()
     {
-        if (!canMove)
+        if (!canMove || isDashing || isGroundSlam)
             return;
 
         //check if sprinting and change current speed
@@ -142,8 +235,6 @@ public class RaptorController : MonoBehaviour
             currentSpeed = Speed;
         }
 
-        // the Z component of the Vector is set as Y as the control input is sent through as a Vector2
-        //so instead of setting the Y value (up/down) we have to set the Z (towards/away)
         rb.velocity = new Vector3(moveInput.x * currentSpeed, rb.velocity.y, moveInput.y * currentSpeed);
 
         #region Flipping
@@ -179,4 +270,5 @@ public class RaptorController : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
     #endregion
+
 }

@@ -222,7 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c22fe71ecc3ccf4285d31f253176165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanGroundSlam: 1
+  CanDash: 0
   CanSprint: 0
+  CanFly: 0
   Speed: 5
   SprintSpeed: 10
   JumpForce: 10
@@ -236,6 +239,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   GroundedRememberTime: 0.1
+  GroundSlamSpeed: 20
+  PreSlamHoverTime: 1
+  SlamMinHeight: 2
+  DashSpeed: 50
+  NumberOfDashes: 1
+  DashDuration: 0.1
+  FlyUpForce: 0.5
+  FlyingCooldownTime: 0.1
 --- !u!54 &601102350
 Rigidbody:
   m_ObjectHideFlags: 0
