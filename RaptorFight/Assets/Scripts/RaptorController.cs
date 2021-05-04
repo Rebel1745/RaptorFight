@@ -8,9 +8,12 @@ public class RaptorController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponentInChildren<Rigidbody>();
-
         if (rb == null)
             Debug.LogError("No RigidBody found");
+
+        anim = GetComponentInChildren<Animator>();
+        if (anim == null)
+            Debug.LogError("Animator not found");
 
         pc = new PlayerControls();
     }
@@ -37,7 +40,8 @@ public class RaptorController : MonoBehaviour
     #region Variables
     Rigidbody rb;
     PlayerControls pc;
-    
+    Animator anim;
+
     [Header("Abilities")]
     public bool CanGroundSlam = false;
     public bool CanDash = false;
@@ -236,6 +240,7 @@ public class RaptorController : MonoBehaviour
         }
 
         rb.velocity = new Vector3(moveInput.x * currentSpeed, rb.velocity.y, moveInput.y * currentSpeed);
+        anim.SetFloat("Speed", Mathf.Abs(moveInput.x + moveInput.y));
 
         #region Flipping
         // If the input is moving the player right and the player is facing left...
