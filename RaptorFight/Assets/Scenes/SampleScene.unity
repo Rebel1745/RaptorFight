@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241876355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 601102348}
@@ -260,15 +260,16 @@ MonoBehaviour:
   CanDash: 0
   CanSprint: 0
   CanFly: 0
-  Speed: 5
+  CanMeleeAttack: 1
+  Speed: 2
   SprintSpeed: 10
   JumpForce: 10
-  NumberOfJumps: 2
+  NumberOfJumps: 0
   jumpsLeft: 0
   FallMultiplier: 2.5
   LowJumpMultiplier: 2
   GroundCheck: {fileID: 241876356}
-  CheckRadius: 1
+  CheckRadius: 0.1
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -281,6 +282,7 @@ MonoBehaviour:
   DashDuration: 0.1
   FlyUpForce: 0.5
   FlyingCooldownTime: 0.1
+  MeleeAttackCooldown: 1
 --- !u!54 &601102350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -507,13 +509,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.1613454, y: 0, z: 0, w: 0.98689806}
-  m_LocalPosition: {x: 0, y: 6.43, z: -10}
+  m_LocalRotation: {x: -0.023995444, y: -0.00899681, z: -0.00021596492, w: 0.99967164}
+  m_LocalPosition: {x: -0.01613762, y: 2.363501, z: -7.4772563}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 18.57, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.94, y: 0, z: 0}
 --- !u!1 &1287073145
 GameObject:
   m_ObjectHideFlags: 0

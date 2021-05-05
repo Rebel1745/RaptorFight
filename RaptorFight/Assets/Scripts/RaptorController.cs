@@ -47,6 +47,7 @@ public class RaptorController : MonoBehaviour
     public bool CanDash = false;
     public bool CanSprint = false;
     public bool CanFly = false;
+    public bool CanMeleeAttack = false;
 
     [Space]
     [Header("Movement")]
@@ -92,6 +93,12 @@ public class RaptorController : MonoBehaviour
     public float FlyUpForce = 0.5f; // low number for glide, high to fly
     public float FlyingCooldownTime = 0.1f;
     float flyingCooldown;
+
+    [Space]
+    [Header("Attacks")]
+    bool meleeAttackAvailable = false;
+    public float MeleeAttackCooldown = 1f;
+    private float meleeAttackCooldown = 0f;
     #endregion
 
     #region Update Funtions
@@ -106,6 +113,7 @@ public class RaptorController : MonoBehaviour
         DoDashing();
         DoFlying();
         CheckGroundSlam();
+        UpdateAttack();
         moveInput = pc.Land.Movement.ReadValue<Vector2>().normalized;
     }
     #endregion
@@ -185,30 +193,30 @@ public class RaptorController : MonoBehaviour
         isGrounded = Physics.Raycast(GroundCheck.position, Vector2.down, CheckRadius, WhatIsGround);
         groundedRemember -= Time.deltaTime;
 
-        if (isGrounded)
-        {
-            // setting this allows us to be considered 'grounded' for a time after not being grounded. Coyote time!
-            groundedRemember = GroundedRememberTime;
-        }
-
-        if (isGrounded)
-        {
-            jumpsLeft = NumberOfJumps;
-            dashesLeft = NumberOfDashes;
-        }
-
         if (((groundedRemember > 0 && canJump) || jumpsLeft > 0) && pc.Land.Jump.triggered)
         {
             groundedRemember = 0;
             rb.velocity = new Vector3(rb.velocity.x, JumpForce, rb.velocity.z);
             canJump = false;
             jumpsLeft--;
+            anim.SetBool("Jumping", true);
+        }
+
+        if (isGrounded)
+        {
+            // setting this allows us to be considered 'grounded' for a time after not being grounded. Coyote time!
+            groundedRemember = GroundedRememberTime;
+            jumpsLeft = NumberOfJumps;
+            dashesLeft = NumberOfDashes;
         }
 
         if (pc.Land.Jump.ReadValue<float>() == 0)
         {
             if (!canJump)
                 canJump = true;
+
+            if(isGrounded)
+                anim.SetBool("Jumping", false);
         }
 
         // if jumping or falling, alter gravity to allow for medium and large jumps
@@ -240,7 +248,10 @@ public class RaptorController : MonoBehaviour
         }
 
         rb.velocity = new Vector3(moveInput.x * currentSpeed, rb.velocity.y, moveInput.y * currentSpeed);
-        anim.SetFloat("Speed", Mathf.Abs(moveInput.x + moveInput.y));
+        if(isGrounded)
+            anim.SetFloat("Speed", Mathf.Abs(moveInput.x + moveInput.y));
+        else
+            anim.SetFloat("Speed", 0);
 
         #region Flipping
         // If the input is moving the player right and the player is facing left...
@@ -264,9 +275,7 @@ public class RaptorController : MonoBehaviour
         yield return new WaitForSeconds(time);
         canMove = true;
     }
-    #endregion
 
-    #region Flip Function
     private void Flip()
     {
         // Switch the way the player is labelled as facing.
@@ -276,4 +285,32 @@ public class RaptorController : MonoBehaviour
     }
     #endregion
 
+    #region Attacking
+    void UpdateAttackCountdowns()
+    {
+        if (!meleeAttackAvailable)
+            meleeAttackCooldown -= Time.deltaTime;
+
+        if (meleeAttackCooldown <= 0f)
+            meleeAttackAvailable = true;
+    }
+
+    void UpdateAttack()
+    {
+        UpdateAttackCountdowns();
+
+        if (CanMeleeAttack && meleeAttackAvailable && pc.Land.MeleeAttack.ReadValue<float>() > 0.1f)
+        {
+            // melee attack with the hand facing the screen
+            if(isFacingRight)
+                anim.SetTrigger("AttackMeleeRight");
+            else
+                anim.SetTrigger("AttackMeleeLeft");
+
+            meleeAttackAvailable = false;
+            meleeAttackCooldown = MeleeAttackCooldown;
+        }
+    }
+
+    #endregion
 }
