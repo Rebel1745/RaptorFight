@@ -59,6 +59,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Leap"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a9dffb3-d324-4efd-9efc-f0b53b799cbc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""4c171fb5-00ce-4830-a00f-539f7d05452b"",
@@ -127,22 +135,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""69fa0b3c-efdb-4aa8-91ac-e9c67cf2a6ff"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Grapple"",
-                    ""type"": ""Button"",
-                    ""id"": ""cc4734c0-c59f-4057-9dd7-25f02f36b865"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""GrappleDirection"",
-                    ""type"": ""Value"",
-                    ""id"": ""9a0cc678-d089-49cc-8831-c2339de2e8de"",
-                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -587,56 +579,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4013e2a0-b687-4d2e-bdf5-0865ec1e8224"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grapple"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""838c3331-23ba-430f-a89e-076c4088745a"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grapple"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e2b7ce75-ae2e-411d-8549-e7af6a27d8b0"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MousePosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cad1806e-9a73-415b-9328-2e8d0adda867"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GrappleDirection"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bc556162-7fbf-434e-99df-35ffd3e413c5"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GrappleDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -661,6 +609,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a0c6e3c-f04f-4fca-a20f-bcb180f3e3d4"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Leap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62c05174-2bbd-4dc4-86f6-be52ef91eeee"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Leap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -674,6 +644,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Land_WallClimb = m_Land.FindAction("WallClimb", throwIfNotFound: true);
         m_Land_WallGrab = m_Land.FindAction("WallGrab", throwIfNotFound: true);
         m_Land_Jump = m_Land.FindAction("Jump", throwIfNotFound: true);
+        m_Land_Leap = m_Land.FindAction("Leap", throwIfNotFound: true);
         m_Land_Attack = m_Land.FindAction("Attack", throwIfNotFound: true);
         m_Land_MeleeAttack = m_Land.FindAction("Melee Attack", throwIfNotFound: true);
         m_Land_Crouch = m_Land.FindAction("Crouch", throwIfNotFound: true);
@@ -683,8 +654,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Land_ChangeForm_Green = m_Land.FindAction("ChangeForm_Green", throwIfNotFound: true);
         m_Land_DashRight = m_Land.FindAction("DashRight", throwIfNotFound: true);
         m_Land_DashLeft = m_Land.FindAction("DashLeft", throwIfNotFound: true);
-        m_Land_Grapple = m_Land.FindAction("Grapple", throwIfNotFound: true);
-        m_Land_GrappleDirection = m_Land.FindAction("GrappleDirection", throwIfNotFound: true);
         m_Land_MousePosition = m_Land.FindAction("MousePosition", throwIfNotFound: true);
     }
 
@@ -740,6 +709,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Land_WallClimb;
     private readonly InputAction m_Land_WallGrab;
     private readonly InputAction m_Land_Jump;
+    private readonly InputAction m_Land_Leap;
     private readonly InputAction m_Land_Attack;
     private readonly InputAction m_Land_MeleeAttack;
     private readonly InputAction m_Land_Crouch;
@@ -749,8 +719,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Land_ChangeForm_Green;
     private readonly InputAction m_Land_DashRight;
     private readonly InputAction m_Land_DashLeft;
-    private readonly InputAction m_Land_Grapple;
-    private readonly InputAction m_Land_GrappleDirection;
     private readonly InputAction m_Land_MousePosition;
     public struct LandActions
     {
@@ -761,6 +729,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @WallClimb => m_Wrapper.m_Land_WallClimb;
         public InputAction @WallGrab => m_Wrapper.m_Land_WallGrab;
         public InputAction @Jump => m_Wrapper.m_Land_Jump;
+        public InputAction @Leap => m_Wrapper.m_Land_Leap;
         public InputAction @Attack => m_Wrapper.m_Land_Attack;
         public InputAction @MeleeAttack => m_Wrapper.m_Land_MeleeAttack;
         public InputAction @Crouch => m_Wrapper.m_Land_Crouch;
@@ -770,8 +739,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @ChangeForm_Green => m_Wrapper.m_Land_ChangeForm_Green;
         public InputAction @DashRight => m_Wrapper.m_Land_DashRight;
         public InputAction @DashLeft => m_Wrapper.m_Land_DashLeft;
-        public InputAction @Grapple => m_Wrapper.m_Land_Grapple;
-        public InputAction @GrappleDirection => m_Wrapper.m_Land_GrappleDirection;
         public InputAction @MousePosition => m_Wrapper.m_Land_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_Land; }
         public void Enable() { Get().Enable(); }
@@ -797,6 +764,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
+                @Leap.started -= m_Wrapper.m_LandActionsCallbackInterface.OnLeap;
+                @Leap.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnLeap;
+                @Leap.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnLeap;
                 @Attack.started -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
@@ -824,12 +794,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @DashLeft.started -= m_Wrapper.m_LandActionsCallbackInterface.OnDashLeft;
                 @DashLeft.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnDashLeft;
                 @DashLeft.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnDashLeft;
-                @Grapple.started -= m_Wrapper.m_LandActionsCallbackInterface.OnGrapple;
-                @Grapple.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnGrapple;
-                @Grapple.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnGrapple;
-                @GrappleDirection.started -= m_Wrapper.m_LandActionsCallbackInterface.OnGrappleDirection;
-                @GrappleDirection.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnGrappleDirection;
-                @GrappleDirection.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnGrappleDirection;
                 @MousePosition.started -= m_Wrapper.m_LandActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnMousePosition;
@@ -852,6 +816,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Leap.started += instance.OnLeap;
+                @Leap.performed += instance.OnLeap;
+                @Leap.canceled += instance.OnLeap;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -879,12 +846,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @DashLeft.started += instance.OnDashLeft;
                 @DashLeft.performed += instance.OnDashLeft;
                 @DashLeft.canceled += instance.OnDashLeft;
-                @Grapple.started += instance.OnGrapple;
-                @Grapple.performed += instance.OnGrapple;
-                @Grapple.canceled += instance.OnGrapple;
-                @GrappleDirection.started += instance.OnGrappleDirection;
-                @GrappleDirection.performed += instance.OnGrappleDirection;
-                @GrappleDirection.canceled += instance.OnGrappleDirection;
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
@@ -899,6 +860,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnWallClimb(InputAction.CallbackContext context);
         void OnWallGrab(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnLeap(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnMeleeAttack(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
@@ -908,8 +870,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnChangeForm_Green(InputAction.CallbackContext context);
         void OnDashRight(InputAction.CallbackContext context);
         void OnDashLeft(InputAction.CallbackContext context);
-        void OnGrapple(InputAction.CallbackContext context);
-        void OnGrappleDirection(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
     }
 }

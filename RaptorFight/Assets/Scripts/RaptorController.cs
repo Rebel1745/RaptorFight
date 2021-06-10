@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RaptorController : MonoBehaviour
 {
@@ -48,6 +48,7 @@ public class RaptorController : MonoBehaviour
     public bool CanSprint = false;
     public bool CanFly = false;
     public bool CanMeleeAttack = false;
+    public bool CanLeap = false;
 
     [Space]
     [Header("Movement")]
@@ -72,6 +73,14 @@ public class RaptorController : MonoBehaviour
     public LayerMask WhatIsGround;
     public float GroundedRememberTime = 0.1f;
     float groundedRemember = 0;
+    private bool canLeap = true;
+    private bool isLeaping = false;
+    public float LeapHeight = 5f;
+    public float LeapDuration = 2f;
+    private float currentLeapTime = 0f;
+    private Vector3 leapStartPos = Vector3.zero;
+    private Vector3 leapEndPos = Vector3.zero;
+    public Transform leapDest;
 
     [Space]
     [Header("Ground Slam")]
@@ -110,6 +119,7 @@ public class RaptorController : MonoBehaviour
     private void Update()
     {
         DoJumping();
+        DoLeaping();
         DoDashing();
         DoFlying();
         CheckGroundSlam();
@@ -228,6 +238,45 @@ public class RaptorController : MonoBehaviour
         {
             rb.velocity += Vector3.up * Physics.gravity.y * LowJumpMultiplier * Time.deltaTime;
         }
+    }
+    
+    void DoLeaping()
+    {
+        if (isLeaping)
+        {
+            currentLeapTime += Time.deltaTime;
+
+            currentLeapTime = currentLeapTime % LeapDuration;
+
+            transform.position = Parabola(leapStartPos, leapEndPos, LeapHeight, currentLeapTime / LeapDuration);
+
+            if((LeapDuration - currentLeapTime) < 0.01f)
+            {
+                isLeaping = false;
+                canLeap = true;
+            }
+        }
+        else
+        {
+            if (CanLeap && canLeap && pc.Land.Leap.triggered)
+            {
+                currentLeapTime = 0;
+                isLeaping = true;
+                canLeap = false;
+
+                leapStartPos = transform.position;
+                leapEndPos = leapDest.position;
+            }
+        }
+    }
+
+    public static Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
+    {
+        Func<float, float> f = x => -4 * height * x * x + 4 * height * x;
+
+        var mid = Vector3.Lerp(start, end, t);
+
+        return new Vector3(mid.x, f(t) + Mathf.Lerp(start.y, end.y, t), mid.z);
     }
     #endregion
 
