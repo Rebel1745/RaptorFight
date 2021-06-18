@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -24,6 +25,8 @@ public class RaptorController : MonoBehaviour
 
         jumpsLeft = NumberOfJumps;
         dashesLeft = NumberOfDashes;
+
+        leapTargets = new List<GameObject>();
     }
 
     private void OnEnable()
@@ -73,14 +76,19 @@ public class RaptorController : MonoBehaviour
     public LayerMask WhatIsGround;
     public float GroundedRememberTime = 0.1f;
     float groundedRemember = 0;
+
+    [Space]
+    [Header("Leaping")]
     private bool canLeap = true;
     private bool isLeaping = false;
     public float LeapHeight = 5f;
     public float LeapDuration = 2f;
+    public float MaxLeapDistance = 10f;
     private float currentLeapTime = 0f;
     private Vector3 leapStartPos = Vector3.zero;
     private Vector3 leapEndPos = Vector3.zero;
-    public Transform leapDest;
+    public List<GameObject> leapTargets;
+    public LayerMask WhatIsEnemy;
 
     [Space]
     [Header("Ground Slam")]
@@ -124,7 +132,7 @@ public class RaptorController : MonoBehaviour
         DoFlying();
         CheckGroundSlam();
         UpdateAttack();
-        moveInput = pc.Land.Movement.ReadValue<Vector2>().normalized;
+        moveInput = pc.GameControls.Movement.ReadValue<Vector2>().normalized;
     }
     #endregion
 
@@ -138,7 +146,7 @@ public class RaptorController : MonoBehaviour
             return;
         
 
-        if(!Physics.Raycast(GroundCheck.position, Vector3.down, out RaycastHit hit, SlamMinHeight, WhatIsGround) && pc.Land.Crouch.triggered)
+        if(!Physics.Raycast(GroundCheck.position, Vector3.down, out RaycastHit hit, SlamMinHeight, WhatIsGround) && pc.GameControls.GroundSlam.triggered)
         {
             isGroundSlam = true;
             // stay static 
@@ -165,7 +173,7 @@ public class RaptorController : MonoBehaviour
         // check to see if we are falling
         if (CanFly && jumpsLeft == 0 && !isGrounded && rb.velocity.y < 0 && flyingCooldown <= 0)
         {
-            if (pc.Land.Jump.triggered)
+            if (pc.GameControls.Jump.triggered)
             {
                 rb.velocity = new Vector2(rb.velocity.x, FlyUpForce);
                 flyingCooldown = FlyingCooldownTime;
@@ -177,11 +185,11 @@ public class RaptorController : MonoBehaviour
     #region Dashing
     void DoDashing()
     {
-        if (CanDash && dashesLeft > 0 && !isDashing && (pc.Land.DashLeft.triggered || pc.Land.DashRight.triggered))
+        if (CanDash && dashesLeft > 0 && !isDashing && (pc.GameControls.DashLeft.triggered || pc.GameControls.DashRight.triggered))
         {
             isDashing = true;
             Vector2 dir;
-            dir = pc.Land.DashRight.triggered ? Vector2.right : Vector2.left;
+            dir = pc.GameControls.DashRight.triggered ? Vector2.right : Vector2.left;
             rb.velocity = dir * DashSpeed;
             dashesLeft--;
 
@@ -203,7 +211,7 @@ public class RaptorController : MonoBehaviour
         isGrounded = Physics.Raycast(GroundCheck.position, Vector2.down, CheckRadius, WhatIsGround);
         groundedRemember -= Time.deltaTime;
 
-        if (((groundedRemember > 0 && canJump) || jumpsLeft > 0) && pc.Land.Jump.triggered)
+        if (((groundedRemember > 0 && canJump) || jumpsLeft > 0) && pc.GameControls.Jump.triggered)
         {
             groundedRemember = 0;
             rb.velocity = new Vector3(rb.velocity.x, JumpForce, rb.velocity.z);
@@ -220,7 +228,7 @@ public class RaptorController : MonoBehaviour
             dashesLeft = NumberOfDashes;
         }
 
-        if (pc.Land.Jump.ReadValue<float>() == 0)
+        if (pc.GameControls.Jump.ReadValue<float>() == 0)
         {
             if (!canJump)
                 canJump = true;
@@ -234,12 +242,14 @@ public class RaptorController : MonoBehaviour
         {
             rb.velocity += Vector3.up * Physics.gravity.y * FallMultiplier * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && pc.Land.Jump.ReadValue<float>() == 0f)
+        else if (rb.velocity.y > 0 && pc.GameControls.Jump.ReadValue<float>() == 0f)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * LowJumpMultiplier * Time.deltaTime;
         }
     }
-    
+    #endregion
+
+    #region Leaping
     void DoLeaping()
     {
         if (isLeaping)
@@ -258,15 +268,32 @@ public class RaptorController : MonoBehaviour
         }
         else
         {
-            if (CanLeap && canLeap && pc.Land.Leap.triggered)
+            if (CanLeap && canLeap && pc.GameControls.Leap.triggered)
+            {
+                // we want to start leaping
+                // clear previous targets
+                leapTargets.Clear();
+                // find possible leap targets
+                Collider[] targets = Physics.OverlapSphere(transform.position, MaxLeapDistance, WhatIsEnemy);
+                foreach(Collider c in targets)
+                {
+                    if(c.GetComponent<Enemy>().EnemyState == Enemy.ENEMY_STATE.Floored)
+                    {
+                        leapTargets.Add(c.gameObject);
+                    }
+                }
+                PrintList(leapTargets);
+            }
+
+            /*if (CanLeap && canLeap && pc.GameControls.Leap.ReadValue<float>() == 1f)
             {
                 currentLeapTime = 0;
                 isLeaping = true;
                 canLeap = false;
 
                 leapStartPos = transform.position;
-                leapEndPos = leapDest.position;
-            }
+                //leapEndPos = leapDest.position;
+            }*/
         }
     }
 
@@ -287,7 +314,7 @@ public class RaptorController : MonoBehaviour
             return;
 
         //check if sprinting and change current speed
-        if (CanSprint && pc.Land.Sprint.ReadValue<float>() > 0)
+        if (CanSprint && pc.GameControls.Sprint.ReadValue<float>() > 0)
         {
             currentSpeed = SprintSpeed;
         }
@@ -348,7 +375,7 @@ public class RaptorController : MonoBehaviour
     {
         UpdateAttackCountdowns();
 
-        if (CanMeleeAttack && meleeAttackAvailable && pc.Land.MeleeAttack.ReadValue<float>() > 0.1f)
+        if (CanMeleeAttack && meleeAttackAvailable && pc.GameControls.MeleeAttack.ReadValue<float>() > 0.1f)
         {
             // melee attack with the hand facing the screen
             if(isFacingRight)
@@ -361,5 +388,28 @@ public class RaptorController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Debug
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, MaxLeapDistance);
+    }
+
+    void PrintList(List<GameObject> l)
+    {
+        if(l.Count > 0)
+        {
+            foreach(GameObject g in l)
+            {
+                Debug.Log(g.transform.name);
+            }
+        }
+        else
+        {
+            Debug.Log("Empty list");
+        }
+    }
     #endregion
 }

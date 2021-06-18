@@ -15,7 +15,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Land"",
+            ""name"": ""GameControls"",
             ""id"": ""5a06f747-3aba-43e4-b616-405022081f75"",
             ""actions"": [
                 {
@@ -30,22 +30,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""b7f41d11-8dde-47b1-a0d1-0b7ac6fcfb18"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""WallClimb"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""2ed57162-66e9-43a2-a82f-7e1da5a886b1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""WallGrab"",
-                    ""type"": ""Button"",
-                    ""id"": ""ad4f182b-7596-4b94-8ffc-7925d6cb7c16"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -83,46 +67,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Crouch"",
-                    ""type"": ""Button"",
-                    ""id"": ""7d19725a-ac83-463f-a0f9-2a0a41a604c3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""ChangeForm_Yellow"",
-                    ""type"": ""Button"",
-                    ""id"": ""6a2e687d-4898-4d5d-ba9b-0506c00c3652"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""ChangeForm_Blue"",
-                    ""type"": ""Button"",
-                    ""id"": ""7099e84f-eaa7-4a64-8df1-fdfbf6a494c3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""ChangeForm_Red"",
-                    ""type"": ""Button"",
-                    ""id"": ""bfd018f8-61ee-494f-9bfe-d75475259aa9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""ChangeForm_Green"",
-                    ""type"": ""Button"",
-                    ""id"": ""e116572e-485c-4b39-babd-fc2172cce194"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""DashRight"",
                     ""type"": ""Button"",
                     ""id"": ""3127f792-9bc7-46bb-94bc-6b1b90579377"",
@@ -145,6 +89,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""GroundSlam"",
+                    ""type"": ""Button"",
+                    ""id"": ""0838a644-ca49-401b-b5bd-cb4f3bf0c227"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -165,7 +117,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -176,7 +128,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -187,7 +139,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -198,13 +150,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""LeftStick"",
                     ""id"": ""6edbc5a4-1b82-40e0-92af-5482e3d08dfc"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -220,7 +172,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -231,7 +183,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -242,7 +194,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -253,7 +205,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -264,7 +216,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -275,7 +227,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -286,7 +238,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Melee Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -297,7 +249,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Melee Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -308,186 +260,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/backButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Melee Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""45102c5d-25f2-4d00-a835-d7dcdad53fa0"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""53056f1e-57a2-4927-a3dc-c1139db091e4"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""95ad24c1-1f19-4d44-8d50-ab2c548b36e3"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeForm_Yellow"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3454d509-87d0-4ea1-91b0-86ba558765a5"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeForm_Yellow"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d7bff9b4-f33f-491c-b042-dc7572e2d531"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeForm_Blue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a4aa4133-4a16-4b9f-8840-a48d41bf856f"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeForm_Blue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ba239d59-16a1-475a-a58f-66481a3d4688"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeForm_Red"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""64229bad-3ab8-43f3-8d52-369a347f514f"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeForm_Red"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dc668cc9-c815-4e9f-b806-ebba2e6627e3"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeForm_Green"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8e4a1396-89f8-42d2-9dd5-192ab2e51fe1"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeForm_Green"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WS"",
-                    ""id"": ""88fab757-b4ad-43f0-be7f-8e1eb9231e3d"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallClimb"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""55a47281-dd7d-49ef-83bb-2e0fca1aefbd"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallClimb"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""2a0f4216-94d7-4713-8b1e-92ffc7eafd34"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallClimb"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""LStick"",
-                    ""id"": ""4c948ddb-0f7f-48dc-9692-765b1492d9b8"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallClimb"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""16d528b9-bb32-4cb2-ae1c-dde037220375"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallClimb"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""e0622be5-2a69-4d8d-b0df-613233b8620b"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallClimb"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -495,7 +271,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -506,30 +282,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d72a0374-3d9f-4afb-812e-96e89d37d763"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallGrab"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""383dcf7d-5ea1-41a5-a92d-100301ebaf07"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallGrab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -539,7 +293,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""DashRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -550,7 +304,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""DashRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -561,7 +315,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""DashLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -572,7 +326,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""DashLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -583,7 +337,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -594,7 +348,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -605,7 +359,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -616,7 +370,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Leap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -627,34 +381,78 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Leap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9da1a020-71fb-42c1-bdfc-20c89f7b171e"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""GroundSlam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37f3628e-23b2-472d-b9e0-47f70c419643"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""GroundSlam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard&Mouse"",
+            ""bindingGroup"": ""Keyboard&Mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
-        // Land
-        m_Land = asset.FindActionMap("Land", throwIfNotFound: true);
-        m_Land_Movement = m_Land.FindAction("Movement", throwIfNotFound: true);
-        m_Land_Sprint = m_Land.FindAction("Sprint", throwIfNotFound: true);
-        m_Land_WallClimb = m_Land.FindAction("WallClimb", throwIfNotFound: true);
-        m_Land_WallGrab = m_Land.FindAction("WallGrab", throwIfNotFound: true);
-        m_Land_Jump = m_Land.FindAction("Jump", throwIfNotFound: true);
-        m_Land_Leap = m_Land.FindAction("Leap", throwIfNotFound: true);
-        m_Land_Attack = m_Land.FindAction("Attack", throwIfNotFound: true);
-        m_Land_MeleeAttack = m_Land.FindAction("Melee Attack", throwIfNotFound: true);
-        m_Land_Crouch = m_Land.FindAction("Crouch", throwIfNotFound: true);
-        m_Land_ChangeForm_Yellow = m_Land.FindAction("ChangeForm_Yellow", throwIfNotFound: true);
-        m_Land_ChangeForm_Blue = m_Land.FindAction("ChangeForm_Blue", throwIfNotFound: true);
-        m_Land_ChangeForm_Red = m_Land.FindAction("ChangeForm_Red", throwIfNotFound: true);
-        m_Land_ChangeForm_Green = m_Land.FindAction("ChangeForm_Green", throwIfNotFound: true);
-        m_Land_DashRight = m_Land.FindAction("DashRight", throwIfNotFound: true);
-        m_Land_DashLeft = m_Land.FindAction("DashLeft", throwIfNotFound: true);
-        m_Land_MousePosition = m_Land.FindAction("MousePosition", throwIfNotFound: true);
+        // GameControls
+        m_GameControls = asset.FindActionMap("GameControls", throwIfNotFound: true);
+        m_GameControls_Movement = m_GameControls.FindAction("Movement", throwIfNotFound: true);
+        m_GameControls_Sprint = m_GameControls.FindAction("Sprint", throwIfNotFound: true);
+        m_GameControls_Jump = m_GameControls.FindAction("Jump", throwIfNotFound: true);
+        m_GameControls_Leap = m_GameControls.FindAction("Leap", throwIfNotFound: true);
+        m_GameControls_Attack = m_GameControls.FindAction("Attack", throwIfNotFound: true);
+        m_GameControls_MeleeAttack = m_GameControls.FindAction("Melee Attack", throwIfNotFound: true);
+        m_GameControls_DashRight = m_GameControls.FindAction("DashRight", throwIfNotFound: true);
+        m_GameControls_DashLeft = m_GameControls.FindAction("DashLeft", throwIfNotFound: true);
+        m_GameControls_MousePosition = m_GameControls.FindAction("MousePosition", throwIfNotFound: true);
+        m_GameControls_GroundSlam = m_GameControls.FindAction("GroundSlam", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -701,104 +499,74 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Land
-    private readonly InputActionMap m_Land;
-    private ILandActions m_LandActionsCallbackInterface;
-    private readonly InputAction m_Land_Movement;
-    private readonly InputAction m_Land_Sprint;
-    private readonly InputAction m_Land_WallClimb;
-    private readonly InputAction m_Land_WallGrab;
-    private readonly InputAction m_Land_Jump;
-    private readonly InputAction m_Land_Leap;
-    private readonly InputAction m_Land_Attack;
-    private readonly InputAction m_Land_MeleeAttack;
-    private readonly InputAction m_Land_Crouch;
-    private readonly InputAction m_Land_ChangeForm_Yellow;
-    private readonly InputAction m_Land_ChangeForm_Blue;
-    private readonly InputAction m_Land_ChangeForm_Red;
-    private readonly InputAction m_Land_ChangeForm_Green;
-    private readonly InputAction m_Land_DashRight;
-    private readonly InputAction m_Land_DashLeft;
-    private readonly InputAction m_Land_MousePosition;
-    public struct LandActions
+    // GameControls
+    private readonly InputActionMap m_GameControls;
+    private IGameControlsActions m_GameControlsActionsCallbackInterface;
+    private readonly InputAction m_GameControls_Movement;
+    private readonly InputAction m_GameControls_Sprint;
+    private readonly InputAction m_GameControls_Jump;
+    private readonly InputAction m_GameControls_Leap;
+    private readonly InputAction m_GameControls_Attack;
+    private readonly InputAction m_GameControls_MeleeAttack;
+    private readonly InputAction m_GameControls_DashRight;
+    private readonly InputAction m_GameControls_DashLeft;
+    private readonly InputAction m_GameControls_MousePosition;
+    private readonly InputAction m_GameControls_GroundSlam;
+    public struct GameControlsActions
     {
         private @PlayerControls m_Wrapper;
-        public LandActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Land_Movement;
-        public InputAction @Sprint => m_Wrapper.m_Land_Sprint;
-        public InputAction @WallClimb => m_Wrapper.m_Land_WallClimb;
-        public InputAction @WallGrab => m_Wrapper.m_Land_WallGrab;
-        public InputAction @Jump => m_Wrapper.m_Land_Jump;
-        public InputAction @Leap => m_Wrapper.m_Land_Leap;
-        public InputAction @Attack => m_Wrapper.m_Land_Attack;
-        public InputAction @MeleeAttack => m_Wrapper.m_Land_MeleeAttack;
-        public InputAction @Crouch => m_Wrapper.m_Land_Crouch;
-        public InputAction @ChangeForm_Yellow => m_Wrapper.m_Land_ChangeForm_Yellow;
-        public InputAction @ChangeForm_Blue => m_Wrapper.m_Land_ChangeForm_Blue;
-        public InputAction @ChangeForm_Red => m_Wrapper.m_Land_ChangeForm_Red;
-        public InputAction @ChangeForm_Green => m_Wrapper.m_Land_ChangeForm_Green;
-        public InputAction @DashRight => m_Wrapper.m_Land_DashRight;
-        public InputAction @DashLeft => m_Wrapper.m_Land_DashLeft;
-        public InputAction @MousePosition => m_Wrapper.m_Land_MousePosition;
-        public InputActionMap Get() { return m_Wrapper.m_Land; }
+        public GameControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_GameControls_Movement;
+        public InputAction @Sprint => m_Wrapper.m_GameControls_Sprint;
+        public InputAction @Jump => m_Wrapper.m_GameControls_Jump;
+        public InputAction @Leap => m_Wrapper.m_GameControls_Leap;
+        public InputAction @Attack => m_Wrapper.m_GameControls_Attack;
+        public InputAction @MeleeAttack => m_Wrapper.m_GameControls_MeleeAttack;
+        public InputAction @DashRight => m_Wrapper.m_GameControls_DashRight;
+        public InputAction @DashLeft => m_Wrapper.m_GameControls_DashLeft;
+        public InputAction @MousePosition => m_Wrapper.m_GameControls_MousePosition;
+        public InputAction @GroundSlam => m_Wrapper.m_GameControls_GroundSlam;
+        public InputActionMap Get() { return m_Wrapper.m_GameControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(LandActions set) { return set.Get(); }
-        public void SetCallbacks(ILandActions instance)
+        public static implicit operator InputActionMap(GameControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IGameControlsActions instance)
         {
-            if (m_Wrapper.m_LandActionsCallbackInterface != null)
+            if (m_Wrapper.m_GameControlsActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_LandActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnMovement;
-                @Sprint.started -= m_Wrapper.m_LandActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnSprint;
-                @WallClimb.started -= m_Wrapper.m_LandActionsCallbackInterface.OnWallClimb;
-                @WallClimb.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnWallClimb;
-                @WallClimb.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnWallClimb;
-                @WallGrab.started -= m_Wrapper.m_LandActionsCallbackInterface.OnWallGrab;
-                @WallGrab.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnWallGrab;
-                @WallGrab.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnWallGrab;
-                @Jump.started -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
-                @Leap.started -= m_Wrapper.m_LandActionsCallbackInterface.OnLeap;
-                @Leap.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnLeap;
-                @Leap.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnLeap;
-                @Attack.started -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
-                @MeleeAttack.started -= m_Wrapper.m_LandActionsCallbackInterface.OnMeleeAttack;
-                @MeleeAttack.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnMeleeAttack;
-                @MeleeAttack.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnMeleeAttack;
-                @Crouch.started -= m_Wrapper.m_LandActionsCallbackInterface.OnCrouch;
-                @Crouch.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnCrouch;
-                @Crouch.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnCrouch;
-                @ChangeForm_Yellow.started -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Yellow;
-                @ChangeForm_Yellow.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Yellow;
-                @ChangeForm_Yellow.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Yellow;
-                @ChangeForm_Blue.started -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Blue;
-                @ChangeForm_Blue.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Blue;
-                @ChangeForm_Blue.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Blue;
-                @ChangeForm_Red.started -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Red;
-                @ChangeForm_Red.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Red;
-                @ChangeForm_Red.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Red;
-                @ChangeForm_Green.started -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Green;
-                @ChangeForm_Green.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Green;
-                @ChangeForm_Green.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnChangeForm_Green;
-                @DashRight.started -= m_Wrapper.m_LandActionsCallbackInterface.OnDashRight;
-                @DashRight.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnDashRight;
-                @DashRight.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnDashRight;
-                @DashLeft.started -= m_Wrapper.m_LandActionsCallbackInterface.OnDashLeft;
-                @DashLeft.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnDashLeft;
-                @DashLeft.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnDashLeft;
-                @MousePosition.started -= m_Wrapper.m_LandActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnMousePosition;
+                @Movement.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMovement;
+                @Sprint.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnSprint;
+                @Jump.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnJump;
+                @Leap.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnLeap;
+                @Leap.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnLeap;
+                @Leap.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnLeap;
+                @Attack.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
+                @MeleeAttack.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMeleeAttack;
+                @MeleeAttack.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMeleeAttack;
+                @MeleeAttack.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMeleeAttack;
+                @DashRight.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashRight;
+                @DashRight.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashRight;
+                @DashRight.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashRight;
+                @DashLeft.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashLeft;
+                @DashLeft.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashLeft;
+                @DashLeft.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashLeft;
+                @MousePosition.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
+                @GroundSlam.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnGroundSlam;
+                @GroundSlam.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnGroundSlam;
+                @GroundSlam.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnGroundSlam;
             }
-            m_Wrapper.m_LandActionsCallbackInterface = instance;
+            m_Wrapper.m_GameControlsActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movement.started += instance.OnMovement;
@@ -807,12 +575,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
-                @WallClimb.started += instance.OnWallClimb;
-                @WallClimb.performed += instance.OnWallClimb;
-                @WallClimb.canceled += instance.OnWallClimb;
-                @WallGrab.started += instance.OnWallGrab;
-                @WallGrab.performed += instance.OnWallGrab;
-                @WallGrab.canceled += instance.OnWallGrab;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -825,21 +587,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MeleeAttack.started += instance.OnMeleeAttack;
                 @MeleeAttack.performed += instance.OnMeleeAttack;
                 @MeleeAttack.canceled += instance.OnMeleeAttack;
-                @Crouch.started += instance.OnCrouch;
-                @Crouch.performed += instance.OnCrouch;
-                @Crouch.canceled += instance.OnCrouch;
-                @ChangeForm_Yellow.started += instance.OnChangeForm_Yellow;
-                @ChangeForm_Yellow.performed += instance.OnChangeForm_Yellow;
-                @ChangeForm_Yellow.canceled += instance.OnChangeForm_Yellow;
-                @ChangeForm_Blue.started += instance.OnChangeForm_Blue;
-                @ChangeForm_Blue.performed += instance.OnChangeForm_Blue;
-                @ChangeForm_Blue.canceled += instance.OnChangeForm_Blue;
-                @ChangeForm_Red.started += instance.OnChangeForm_Red;
-                @ChangeForm_Red.performed += instance.OnChangeForm_Red;
-                @ChangeForm_Red.canceled += instance.OnChangeForm_Red;
-                @ChangeForm_Green.started += instance.OnChangeForm_Green;
-                @ChangeForm_Green.performed += instance.OnChangeForm_Green;
-                @ChangeForm_Green.canceled += instance.OnChangeForm_Green;
                 @DashRight.started += instance.OnDashRight;
                 @DashRight.performed += instance.OnDashRight;
                 @DashRight.canceled += instance.OnDashRight;
@@ -849,27 +596,42 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @GroundSlam.started += instance.OnGroundSlam;
+                @GroundSlam.performed += instance.OnGroundSlam;
+                @GroundSlam.canceled += instance.OnGroundSlam;
             }
         }
     }
-    public LandActions @Land => new LandActions(this);
-    public interface ILandActions
+    public GameControlsActions @GameControls => new GameControlsActions(this);
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
+    {
+        get
+        {
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
+    public interface IGameControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
-        void OnWallClimb(InputAction.CallbackContext context);
-        void OnWallGrab(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLeap(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnMeleeAttack(InputAction.CallbackContext context);
-        void OnCrouch(InputAction.CallbackContext context);
-        void OnChangeForm_Yellow(InputAction.CallbackContext context);
-        void OnChangeForm_Blue(InputAction.CallbackContext context);
-        void OnChangeForm_Red(InputAction.CallbackContext context);
-        void OnChangeForm_Green(InputAction.CallbackContext context);
         void OnDashRight(InputAction.CallbackContext context);
         void OnDashLeft(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnGroundSlam(InputAction.CallbackContext context);
     }
 }
