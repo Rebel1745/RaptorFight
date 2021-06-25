@@ -208,6 +208,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raptor
       objectReference: {fileID: 0}
+    - target: {fileID: 6926250957748806120, guid: a0e12c5b984523a43a5336256413253b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c62e7dc2d72c9e4eb011b70efe9ec6d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0e12c5b984523a43a5336256413253b, type: 3}
 --- !u!1 &601102347
@@ -277,8 +281,7 @@ MonoBehaviour:
   GroundedRememberTime: 0.1
   LeapHeight: 3
   LeapDuration: 1
-  MaxLeapDistance: 10
-  leapTargets: []
+  MaxLeapDistance: 20
   WhatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
@@ -798,6 +801,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8593829869160273784, guid: abe7fd57da4c4b44198973356415b5de, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5021705e493470f4ab6e2aef766c5618, type: 2}
     - target: {fileID: 8593829869160273786, guid: abe7fd57da4c4b44198973356415b5de, type: 3}
       propertyPath: m_RootOrder
       value: 4

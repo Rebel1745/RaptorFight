@@ -8,16 +8,42 @@ public class Enemy : MonoBehaviour
     public enum ENEMY_STATE { Alive, Floored, Dead }
     public ENEMY_STATE EnemyState = ENEMY_STATE.Alive;
 
+    public Material FlooredMat;
+    public Material DeadMat;
+
+    private Renderer enemyMat;
+
     // Start is called before the first frame update
     void Start()
     {
         // just for testing purposes
         EnemyState = ENEMY_STATE.Floored;
+        enemyMat = GetComponent<Renderer>();
+        enemyMat.sharedMaterial = FlooredMat;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeState(ENEMY_STATE e)
     {
-        
+        EnemyState = e;
+
+        switch (e)
+        {
+            case ENEMY_STATE.Floored:
+                enemyMat.sharedMaterial = FlooredMat;
+                break;
+            case ENEMY_STATE.Dead:
+                enemyMat.sharedMaterial = DeadMat;
+                break;
+        }
+
+        if(e == ENEMY_STATE.Dead)
+            StartCoroutine(ChangeStateAfterTime(7.0f));
+    }
+
+    IEnumerator ChangeStateAfterTime(float t)
+    {
+        yield return new WaitForSeconds(t);
+
+        ChangeState(ENEMY_STATE.Floored);
     }
 }

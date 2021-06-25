@@ -87,7 +87,7 @@ public class RaptorController : MonoBehaviour
     private float currentLeapTime = 0f;
     private Vector3 leapStartPos = Vector3.zero;
     private Vector3 leapEndPos = Vector3.zero;
-    public List<GameObject> leapTargets;
+    private List<GameObject> leapTargets;
     public LayerMask WhatIsEnemy;
 
     [Space]
@@ -260,7 +260,7 @@ public class RaptorController : MonoBehaviour
 
             transform.position = Parabola(leapStartPos, leapEndPos, LeapHeight, currentLeapTime / LeapDuration);
 
-            if((LeapDuration - currentLeapTime) < 0.01f)
+            if((LeapDuration - currentLeapTime) <= 0.05f)
             {
                 isLeaping = false;
                 canLeap = true;
@@ -270,6 +270,8 @@ public class RaptorController : MonoBehaviour
         {
             if (CanLeap && canLeap && pc.GameControls.Leap.triggered)
             {
+                GameObject leapTarget = null;
+                float leapTargetDistance = Mathf.Infinity;
                 // we want to start leaping
                 // clear previous targets
                 leapTargets.Clear();
@@ -282,18 +284,32 @@ public class RaptorController : MonoBehaviour
                         leapTargets.Add(c.gameObject);
                     }
                 }
-                PrintList(leapTargets);
+
+                if(leapTargets.Count > 0)
+                {
+                    foreach(GameObject g in leapTargets)
+                    {
+                        if (leapTarget == null || Math.Abs(Vector3.Distance(g.transform.position, leapTarget.transform.position)) > leapTargetDistance)
+                        {
+                            leapTarget = g;
+                            leapTargetDistance = Math.Abs(Vector3.Distance(g.transform.position, leapTarget.transform.position));
+                        }
+                    }
+
+                    currentLeapTime = 0;
+                    isLeaping = true;
+                    canLeap = false;
+
+                    leapStartPos = transform.position;
+                    leapEndPos = leapTarget.transform.position;
+
+                    leapTarget.GetComponent<Enemy>().ChangeState(Enemy.ENEMY_STATE.Dead);
+                }
+                else
+                {
+                    Debug.Log("No leap target");
+                }
             }
-
-            /*if (CanLeap && canLeap && pc.GameControls.Leap.ReadValue<float>() == 1f)
-            {
-                currentLeapTime = 0;
-                isLeaping = true;
-                canLeap = false;
-
-                leapStartPos = transform.position;
-                //leapEndPos = leapDest.position;
-            }*/
         }
     }
 
