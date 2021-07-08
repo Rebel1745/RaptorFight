@@ -45,6 +45,19 @@ public class RaptorController : MonoBehaviour
     PlayerControls pc;
     Animator anim;
 
+    private string animState;
+    const string PLAYER_IDLE = "Player_Idle";
+    const string PLAYER_WALK = "Player_Walk";
+    const string PLAYER_SPRINT = "Player_Sprint";
+    const string PLAYER_JUMP = "Player_Jump";
+    const string PLAYER_LAND = "Player_Land";
+    const string PLAYER_SLASH_RIGHT = "Player_Slash_Right";
+    const string PLAYER_SLASH_LEFT = "Player_Slash_Right";
+    const string PLAYER_BITE_DOWN = "Player_Bite_Down";
+    const string PLAYER_BITE_FORWARD = "Player_Bite_Forward";
+    const string PLAYER_KICK = "Player_Kick";
+    const string PLAYER_TAIL_WHIP = "Player_Tail_Whip";
+
     [Header("Abilities")]
     public bool CanGroundSlam = false;
     public bool CanDash = false;
@@ -66,6 +79,7 @@ public class RaptorController : MonoBehaviour
     [Header("Jumping")]
     public float JumpForce = 5f;
     private bool canJump = true;
+    private bool isJumping = false;
     public int NumberOfJumps = 2;
     public int jumpsLeft;
     public float FallMultiplier = 2.5f;
@@ -149,6 +163,7 @@ public class RaptorController : MonoBehaviour
         if(!Physics.Raycast(GroundCheck.position, Vector3.down, out RaycastHit hit, SlamMinHeight, WhatIsGround) && pc.GameControls.GroundSlam.triggered)
         {
             isGroundSlam = true;
+            ChangeAnimationState(PLAYER_JUMP);
             // stay static 
             rb.useGravity = false;
             rb.velocity = Vector3.zero;
@@ -159,6 +174,7 @@ public class RaptorController : MonoBehaviour
 
     void DoGroundSlam()
     {
+        ChangeAnimationState(PLAYER_LAND);
         rb.useGravity = true;
         rb.velocity = new Vector2(0f, Mathf.Abs(GroundSlamSpeed) * -1);
     }
@@ -208,16 +224,17 @@ public class RaptorController : MonoBehaviour
     void DoJumping()
     {
         // if we are on the ground, we can jump
-        isGrounded = Physics.Raycast(GroundCheck.position, Vector2.down, CheckRadius, WhatIsGround);
+        isGrounded = Physics.Raycast(GroundCheck.position, Vector3.down, CheckRadius, WhatIsGround);
         groundedRemember -= Time.deltaTime;
 
         if (((groundedRemember > 0 && canJump) || jumpsLeft > 0) && pc.GameControls.Jump.triggered)
         {
+            isJumping = true;
             groundedRemember = 0;
             rb.velocity = new Vector3(rb.velocity.x, JumpForce, rb.velocity.z);
             canJump = false;
             jumpsLeft--;
-            anim.SetBool("Jumping", true);
+            ChangeAnimationState(PLAYER_JUMP);
         }
 
         if (isGrounded)
@@ -234,12 +251,13 @@ public class RaptorController : MonoBehaviour
                 canJump = true;
 
             if(isGrounded)
-                anim.SetBool("Jumping", false);
+                isJumping = false;
         }
 
         // if jumping or falling, alter gravity to allow for medium and large jumps
-        if (rb.velocity.y < 0)
+        if (isJumping && rb.velocity.y < 0)
         {
+            ChangeAnimationState(PLAYER_LAND);
             rb.velocity += Vector3.up * Physics.gravity.y * FallMultiplier * Time.deltaTime;
         }
         else if (rb.velocity.y > 0 && pc.GameControls.Jump.ReadValue<float>() == 0f)
@@ -257,6 +275,11 @@ public class RaptorController : MonoBehaviour
             currentLeapTime += Time.deltaTime;
 
             currentLeapTime = currentLeapTime % LeapDuration;
+
+            if (currentLeapTime >= LeapDuration / 2)
+                ChangeAnimationState(PLAYER_LAND);
+            else
+                ChangeAnimationState(PLAYER_JUMP);
 
             transform.position = Parabola(leapStartPos, leapEndPos, LeapHeight, currentLeapTime / LeapDuration);
 
@@ -302,7 +325,14 @@ public class RaptorController : MonoBehaviour
 
                     leapStartPos = transform.position;
                     leapEndPos = leapTarget.transform.position;
-
+                    Debug.Log(transform.position.x + " - " + leapTarget.transform.position.x + " = " + (transform.position.x - leapTarget.transform.position.x));
+                    if(transform.position.x - leapTarget.transform.position.x < 0 && !isFacingRight)
+                    {
+                        Flip();
+                    } else if (transform.position.x - leapTarget.transform.position.x > 0 && isFacingRight)
+                    {
+                        Flip();
+                    }
                     leapTarget.GetComponent<Enemy>().ChangeState(Enemy.ENEMY_STATE.Dead);
                 }
                 else
@@ -323,6 +353,18 @@ public class RaptorController : MonoBehaviour
     }
     #endregion
 
+    #region Animation
+    void ChangeAnimationState(string newState)
+    {
+        if (animState == newState)
+            return;
+
+        anim.Play(newState);
+
+        animState = newState;
+    }
+    #endregion
+
     #region Movement
     void DoMovement()
     {
@@ -340,10 +382,14 @@ public class RaptorController : MonoBehaviour
         }
 
         rb.velocity = new Vector3(moveInput.x * currentSpeed, rb.velocity.y, moveInput.y * currentSpeed);
-        if(isGrounded)
-            anim.SetFloat("Speed", Mathf.Abs(moveInput.x + moveInput.y));
-        else
-            anim.SetFloat("Speed", 0);
+        if (isGrounded && !isJumping)
+        {
+            if(Mathf.Abs(moveInput.x + moveInput.y) > 0)
+                ChangeAnimationState(PLAYER_WALK);
+            else
+                ChangeAnimationState(PLAYER_IDLE);
+        }
+            
 
         #region Flipping
         // If the input is moving the player right and the player is facing left...
@@ -394,10 +440,10 @@ public class RaptorController : MonoBehaviour
         if (CanMeleeAttack && meleeAttackAvailable && pc.GameControls.MeleeAttack.ReadValue<float>() > 0.1f)
         {
             // melee attack with the hand facing the screen
-            if(isFacingRight)
-                anim.SetTrigger("AttackMeleeRight");
+            if (isFacingRight)
+                ChangeAnimationState(PLAYER_SLASH_RIGHT);
             else
-                anim.SetTrigger("AttackMeleeLeft");
+                ChangeAnimationState(PLAYER_SLASH_RIGHT);
 
             meleeAttackAvailable = false;
             meleeAttackCooldown = MeleeAttackCooldown;
@@ -411,6 +457,8 @@ public class RaptorController : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, MaxLeapDistance);
+        
+        Debug.DrawLine(GroundCheck.position, Vector3.down, Color.red, CheckRadius);
     }
 
     void PrintList(List<GameObject> l)
