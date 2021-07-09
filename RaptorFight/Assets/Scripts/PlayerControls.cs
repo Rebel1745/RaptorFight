@@ -51,7 +51,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""AttackLeft"",
                     ""type"": ""Button"",
                     ""id"": ""4c171fb5-00ce-4830-a00f-539f7d05452b"",
                     ""expectedControlType"": ""Button"",
@@ -59,7 +59,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Melee Attack"",
+                    ""name"": ""AttackRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5fde96b-f9c6-4cd0-b14e-186420856b99"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackTailWhip"",
                     ""type"": ""Button"",
                     ""id"": ""4a6e9f36-cb82-4f30-9673-9c3933a8b6ca"",
                     ""expectedControlType"": ""Button"",
@@ -67,17 +75,33 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""DashRight"",
+                    ""name"": ""AttackKick"",
                     ""type"": ""Button"",
-                    ""id"": ""3127f792-9bc7-46bb-94bc-6b1b90579377"",
+                    ""id"": ""e4e683d7-aaa6-4ce5-a4d1-78c659508e0f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""DashLeft"",
+                    ""name"": ""AttackBiteForward"",
                     ""type"": ""Button"",
-                    ""id"": ""69fa0b3c-efdb-4aa8-91ac-e9c67cf2a6ff"",
+                    ""id"": ""490e70be-9e58-48d2-9f60-8d57949d1d28"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackBiteDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0d46b44-1e91-41be-9d31-3c67632886ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""3127f792-9bc7-46bb-94bc-6b1b90579377"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -234,23 +258,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8c71729d-8055-482e-aa58-ddeb2cc5ec40"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Melee Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0cd55664-9604-4584-a07c-fba400397197"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Melee Attack"",
+                    ""action"": ""AttackTailWhip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -261,7 +274,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Melee Attack"",
+                    ""action"": ""AttackTailWhip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -294,7 +307,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""DashRight"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -305,29 +318,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""DashRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bdda9192-b409-4c3c-b48e-e3a95cb444ac"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""DashLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""374e5f24-6a6c-4a7c-9baf-9e79d3fa3f19"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""DashLeft"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -349,7 +340,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Attack"",
+                    ""action"": ""AttackLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -360,7 +351,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Attack"",
+                    ""action"": ""AttackLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -407,6 +398,50 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""GroundSlam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ef1d825-e1cf-47b0-9825-ab1cca5f2d1f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AttackRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70a7762e-f10d-4605-9fbf-c13108de3790"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AttackKick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82cc52cd-927f-471c-8342-778435bcac2b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AttackBiteForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a037e3a5-7801-4f38-aafe-31347220abe5"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AttackBiteDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -447,10 +482,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_GameControls_Sprint = m_GameControls.FindAction("Sprint", throwIfNotFound: true);
         m_GameControls_Jump = m_GameControls.FindAction("Jump", throwIfNotFound: true);
         m_GameControls_Leap = m_GameControls.FindAction("Leap", throwIfNotFound: true);
-        m_GameControls_Attack = m_GameControls.FindAction("Attack", throwIfNotFound: true);
-        m_GameControls_MeleeAttack = m_GameControls.FindAction("Melee Attack", throwIfNotFound: true);
-        m_GameControls_DashRight = m_GameControls.FindAction("DashRight", throwIfNotFound: true);
-        m_GameControls_DashLeft = m_GameControls.FindAction("DashLeft", throwIfNotFound: true);
+        m_GameControls_AttackLeft = m_GameControls.FindAction("AttackLeft", throwIfNotFound: true);
+        m_GameControls_AttackRight = m_GameControls.FindAction("AttackRight", throwIfNotFound: true);
+        m_GameControls_AttackTailWhip = m_GameControls.FindAction("AttackTailWhip", throwIfNotFound: true);
+        m_GameControls_AttackKick = m_GameControls.FindAction("AttackKick", throwIfNotFound: true);
+        m_GameControls_AttackBiteForward = m_GameControls.FindAction("AttackBiteForward", throwIfNotFound: true);
+        m_GameControls_AttackBiteDown = m_GameControls.FindAction("AttackBiteDown", throwIfNotFound: true);
+        m_GameControls_Dash = m_GameControls.FindAction("Dash", throwIfNotFound: true);
         m_GameControls_MousePosition = m_GameControls.FindAction("MousePosition", throwIfNotFound: true);
         m_GameControls_GroundSlam = m_GameControls.FindAction("GroundSlam", throwIfNotFound: true);
     }
@@ -506,10 +544,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_GameControls_Sprint;
     private readonly InputAction m_GameControls_Jump;
     private readonly InputAction m_GameControls_Leap;
-    private readonly InputAction m_GameControls_Attack;
-    private readonly InputAction m_GameControls_MeleeAttack;
-    private readonly InputAction m_GameControls_DashRight;
-    private readonly InputAction m_GameControls_DashLeft;
+    private readonly InputAction m_GameControls_AttackLeft;
+    private readonly InputAction m_GameControls_AttackRight;
+    private readonly InputAction m_GameControls_AttackTailWhip;
+    private readonly InputAction m_GameControls_AttackKick;
+    private readonly InputAction m_GameControls_AttackBiteForward;
+    private readonly InputAction m_GameControls_AttackBiteDown;
+    private readonly InputAction m_GameControls_Dash;
     private readonly InputAction m_GameControls_MousePosition;
     private readonly InputAction m_GameControls_GroundSlam;
     public struct GameControlsActions
@@ -520,10 +561,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Sprint => m_Wrapper.m_GameControls_Sprint;
         public InputAction @Jump => m_Wrapper.m_GameControls_Jump;
         public InputAction @Leap => m_Wrapper.m_GameControls_Leap;
-        public InputAction @Attack => m_Wrapper.m_GameControls_Attack;
-        public InputAction @MeleeAttack => m_Wrapper.m_GameControls_MeleeAttack;
-        public InputAction @DashRight => m_Wrapper.m_GameControls_DashRight;
-        public InputAction @DashLeft => m_Wrapper.m_GameControls_DashLeft;
+        public InputAction @AttackLeft => m_Wrapper.m_GameControls_AttackLeft;
+        public InputAction @AttackRight => m_Wrapper.m_GameControls_AttackRight;
+        public InputAction @AttackTailWhip => m_Wrapper.m_GameControls_AttackTailWhip;
+        public InputAction @AttackKick => m_Wrapper.m_GameControls_AttackKick;
+        public InputAction @AttackBiteForward => m_Wrapper.m_GameControls_AttackBiteForward;
+        public InputAction @AttackBiteDown => m_Wrapper.m_GameControls_AttackBiteDown;
+        public InputAction @Dash => m_Wrapper.m_GameControls_Dash;
         public InputAction @MousePosition => m_Wrapper.m_GameControls_MousePosition;
         public InputAction @GroundSlam => m_Wrapper.m_GameControls_GroundSlam;
         public InputActionMap Get() { return m_Wrapper.m_GameControls; }
@@ -547,18 +591,27 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Leap.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnLeap;
                 @Leap.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnLeap;
                 @Leap.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnLeap;
-                @Attack.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttack;
-                @MeleeAttack.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMeleeAttack;
-                @MeleeAttack.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMeleeAttack;
-                @MeleeAttack.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMeleeAttack;
-                @DashRight.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashRight;
-                @DashRight.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashRight;
-                @DashRight.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashRight;
-                @DashLeft.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashLeft;
-                @DashLeft.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashLeft;
-                @DashLeft.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDashLeft;
+                @AttackLeft.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackLeft;
+                @AttackLeft.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackLeft;
+                @AttackLeft.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackLeft;
+                @AttackRight.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackRight;
+                @AttackRight.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackRight;
+                @AttackRight.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackRight;
+                @AttackTailWhip.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackTailWhip;
+                @AttackTailWhip.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackTailWhip;
+                @AttackTailWhip.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackTailWhip;
+                @AttackKick.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackKick;
+                @AttackKick.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackKick;
+                @AttackKick.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackKick;
+                @AttackBiteForward.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackBiteForward;
+                @AttackBiteForward.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackBiteForward;
+                @AttackBiteForward.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackBiteForward;
+                @AttackBiteDown.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackBiteDown;
+                @AttackBiteDown.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackBiteDown;
+                @AttackBiteDown.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnAttackBiteDown;
+                @Dash.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDash;
                 @MousePosition.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
@@ -581,18 +634,27 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Leap.started += instance.OnLeap;
                 @Leap.performed += instance.OnLeap;
                 @Leap.canceled += instance.OnLeap;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
-                @MeleeAttack.started += instance.OnMeleeAttack;
-                @MeleeAttack.performed += instance.OnMeleeAttack;
-                @MeleeAttack.canceled += instance.OnMeleeAttack;
-                @DashRight.started += instance.OnDashRight;
-                @DashRight.performed += instance.OnDashRight;
-                @DashRight.canceled += instance.OnDashRight;
-                @DashLeft.started += instance.OnDashLeft;
-                @DashLeft.performed += instance.OnDashLeft;
-                @DashLeft.canceled += instance.OnDashLeft;
+                @AttackLeft.started += instance.OnAttackLeft;
+                @AttackLeft.performed += instance.OnAttackLeft;
+                @AttackLeft.canceled += instance.OnAttackLeft;
+                @AttackRight.started += instance.OnAttackRight;
+                @AttackRight.performed += instance.OnAttackRight;
+                @AttackRight.canceled += instance.OnAttackRight;
+                @AttackTailWhip.started += instance.OnAttackTailWhip;
+                @AttackTailWhip.performed += instance.OnAttackTailWhip;
+                @AttackTailWhip.canceled += instance.OnAttackTailWhip;
+                @AttackKick.started += instance.OnAttackKick;
+                @AttackKick.performed += instance.OnAttackKick;
+                @AttackKick.canceled += instance.OnAttackKick;
+                @AttackBiteForward.started += instance.OnAttackBiteForward;
+                @AttackBiteForward.performed += instance.OnAttackBiteForward;
+                @AttackBiteForward.canceled += instance.OnAttackBiteForward;
+                @AttackBiteDown.started += instance.OnAttackBiteDown;
+                @AttackBiteDown.performed += instance.OnAttackBiteDown;
+                @AttackBiteDown.canceled += instance.OnAttackBiteDown;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
@@ -627,10 +689,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLeap(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
-        void OnMeleeAttack(InputAction.CallbackContext context);
-        void OnDashRight(InputAction.CallbackContext context);
-        void OnDashLeft(InputAction.CallbackContext context);
+        void OnAttackLeft(InputAction.CallbackContext context);
+        void OnAttackRight(InputAction.CallbackContext context);
+        void OnAttackTailWhip(InputAction.CallbackContext context);
+        void OnAttackKick(InputAction.CallbackContext context);
+        void OnAttackBiteForward(InputAction.CallbackContext context);
+        void OnAttackBiteDown(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnGroundSlam(InputAction.CallbackContext context);
     }

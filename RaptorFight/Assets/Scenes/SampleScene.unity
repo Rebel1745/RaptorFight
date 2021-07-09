@@ -242,10 +242,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanGroundSlam: 0
-  CanDash: 0
-  CanSprint: 0
+  CanDash: 1
+  CanSprint: 1
   CanFly: 0
-  CanMeleeAttack: 0
+  CanJump: 1
+  CanAttackRight: 1
+  CanAttackLeft: 1
+  CanAttackTailWhip: 1
+  CanAttackKick: 1
+  CanAttackBiteForward: 1
+  CanAttackBiteDown: 1
   CanLeap: 1
   Speed: 2
   SprintSpeed: 10
@@ -274,7 +280,12 @@ MonoBehaviour:
   DashDuration: 0.1
   FlyUpForce: 0.5
   FlyingCooldownTime: 0.1
-  MeleeAttackCooldown: 1
+  AttackRightCooldown: 1
+  AttackLeftCooldown: 1
+  AttackTailWhipCooldown: 1
+  AttackKickCooldown: 1
+  AttackBiteForwardCooldown: 1
+  AttackBiteDownCooldown: 1
 --- !u!54 &601102350
 Rigidbody:
   m_ObjectHideFlags: 0

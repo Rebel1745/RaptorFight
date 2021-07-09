@@ -52,7 +52,7 @@ public class RaptorController : MonoBehaviour
     const string PLAYER_JUMP = "Player_Jump";
     const string PLAYER_LAND = "Player_Land";
     const string PLAYER_SLASH_RIGHT = "Player_Slash_Right";
-    const string PLAYER_SLASH_LEFT = "Player_Slash_Right";
+    const string PLAYER_SLASH_LEFT = "Player_Slash_Left";
     const string PLAYER_BITE_DOWN = "Player_Bite_Down";
     const string PLAYER_BITE_FORWARD = "Player_Bite_Forward";
     const string PLAYER_KICK = "Player_Kick";
@@ -60,11 +60,17 @@ public class RaptorController : MonoBehaviour
 
     [Header("Abilities")]
     public bool CanGroundSlam = false;
-    public bool CanDash = false;
-    public bool CanSprint = false;
+    public bool CanDash = true;
+    public bool CanSprint = true;
     public bool CanFly = false;
-    public bool CanMeleeAttack = false;
-    public bool CanLeap = false;
+    public bool CanJump = false;
+    public bool CanAttackRight = true;
+    public bool CanAttackLeft = true;
+    public bool CanAttackTailWhip = true;
+    public bool CanAttackKick = true;
+    public bool CanAttackBiteForward = true;
+    public bool CanAttackBiteDown = true;
+    public bool CanLeap = true;
 
     [Space]
     [Header("Movement")]
@@ -127,9 +133,31 @@ public class RaptorController : MonoBehaviour
 
     [Space]
     [Header("Attacks")]
-    bool meleeAttackAvailable = false;
-    public float MeleeAttackCooldown = 1f;
-    private float meleeAttackCooldown = 0f;
+    private bool isAttacking = false;
+    bool attackRightAvailable = false;
+    public float AttackRightCooldown = 1f;
+    private float attackRightCooldown = 0f;
+    private float attackRightLength = 0.3f;
+    bool attackLeftAvailable = false;
+    public float AttackLeftCooldown = 1f;
+    private float attackLeftCooldown = 0f;
+    private float attackLeftLength = 0.3f;
+    bool attackTailWhipAvailable = false;
+    public float AttackTailWhipCooldown = 1f;
+    private float attackTailWhipCooldown = 0f;
+    private float attackTailWhipLength = 0.3f;
+    bool attackKickAvailable = false;
+    public float AttackKickCooldown = 1f;
+    private float attackKickCooldown = 0f;
+    private float attackKickLength = 0.3f;
+    bool attackBiteForwardAvailable = false;
+    public float AttackBiteForwardCooldown = 1f;
+    private float attackBiteForwardCooldown = 0f;
+    private float attackBiteForwardLength = 0.3f;
+    bool attackBiteDownAvailable = false;
+    public float AttackBiteDownCooldown = 1f;
+    private float attackBiteDownCooldown = 0f;
+    private float attackBiteDownLength = 0.3f;
     #endregion
 
     #region Update Funtions
@@ -156,7 +184,7 @@ public class RaptorController : MonoBehaviour
         if (isGrounded)
             isGroundSlam = false;
 
-        if (!CanGroundSlam && isGroundSlam)
+        if (!CanGroundSlam || isGroundSlam)
             return;
         
 
@@ -201,11 +229,11 @@ public class RaptorController : MonoBehaviour
     #region Dashing
     void DoDashing()
     {
-        if (CanDash && dashesLeft > 0 && !isDashing && (pc.GameControls.DashLeft.triggered || pc.GameControls.DashRight.triggered))
+        if (CanDash && dashesLeft > 0 && !isDashing && pc.GameControls.Dash.triggered)
         {
             isDashing = true;
             Vector2 dir;
-            dir = pc.GameControls.DashRight.triggered ? Vector2.right : Vector2.left;
+            dir = isFacingRight ? Vector2.right : Vector2.left;
             rb.velocity = dir * DashSpeed;
             dashesLeft--;
 
@@ -227,7 +255,7 @@ public class RaptorController : MonoBehaviour
         isGrounded = Physics.Raycast(GroundCheck.position, Vector3.down, CheckRadius, WhatIsGround);
         groundedRemember -= Time.deltaTime;
 
-        if (((groundedRemember > 0 && canJump) || jumpsLeft > 0) && pc.GameControls.Jump.triggered)
+        if (CanJump && ((groundedRemember > 0 && canJump) || jumpsLeft > 0) && pc.GameControls.Jump.triggered)
         {
             isJumping = true;
             groundedRemember = 0;
@@ -382,7 +410,7 @@ public class RaptorController : MonoBehaviour
         }
 
         rb.velocity = new Vector3(moveInput.x * currentSpeed, rb.velocity.y, moveInput.y * currentSpeed);
-        if (isGrounded && !isJumping)
+        if (isGrounded && !isJumping && !isAttacking)
         {
             if(Mathf.Abs(moveInput.x + moveInput.y) > 0)
                 ChangeAnimationState(PLAYER_WALK);
@@ -426,28 +454,105 @@ public class RaptorController : MonoBehaviour
     #region Attacking
     void UpdateAttackCountdowns()
     {
-        if (!meleeAttackAvailable)
-            meleeAttackCooldown -= Time.deltaTime;
+        if (!attackRightAvailable)
+            attackRightCooldown -= Time.deltaTime;
 
-        if (meleeAttackCooldown <= 0f)
-            meleeAttackAvailable = true;
+        if (attackRightCooldown <= 0f)
+            attackRightAvailable = true;
+
+        if (!attackLeftAvailable)
+            attackLeftCooldown -= Time.deltaTime;
+
+        if (attackLeftCooldown <= 0f)
+            attackLeftAvailable = true;
+
+        if (!attackTailWhipAvailable)
+            attackTailWhipCooldown -= Time.deltaTime;
+
+        if (attackTailWhipCooldown <= 0f)
+            attackTailWhipAvailable = true;
+
+        if (!attackKickAvailable)
+            attackKickCooldown -= Time.deltaTime;
+
+        if (attackKickCooldown <= 0f)
+            attackKickAvailable = true;
+
+        if (!attackBiteForwardAvailable)
+            attackBiteForwardCooldown -= Time.deltaTime;
+
+        if (attackBiteForwardCooldown <= 0f)
+            attackBiteForwardAvailable = true;
+
+        if (!attackBiteDownAvailable)
+            attackBiteDownCooldown -= Time.deltaTime;
+
+        if (attackBiteDownCooldown <= 0f)
+            attackBiteDownAvailable = true;
     }
 
     void UpdateAttack()
     {
         UpdateAttackCountdowns();
 
-        if (CanMeleeAttack && meleeAttackAvailable && pc.GameControls.MeleeAttack.ReadValue<float>() > 0.1f)
+        if (isGrounded && CanAttackLeft && attackLeftAvailable && pc.GameControls.AttackLeft.ReadValue<float>() == 1f)
         {
-            // melee attack with the hand facing the screen
-            if (isFacingRight)
-                ChangeAnimationState(PLAYER_SLASH_RIGHT);
-            else
-                ChangeAnimationState(PLAYER_SLASH_RIGHT);
-
-            meleeAttackAvailable = false;
-            meleeAttackCooldown = MeleeAttackCooldown;
+            ChangeAnimationState(PLAYER_SLASH_LEFT);
+            isAttacking = true;
+            attackLeftAvailable = false;
+            Invoke("StopAttacking", attackLeftLength);
+            attackLeftCooldown = AttackLeftCooldown;
         }
+
+        if (isGrounded && CanAttackRight && attackRightAvailable && pc.GameControls.AttackRight.ReadValue<float>() == 1f)
+        {
+            ChangeAnimationState(PLAYER_SLASH_RIGHT);
+            isAttacking = true;
+            attackRightAvailable = false;
+            Invoke("StopAttacking", attackRightLength);
+            attackRightCooldown = AttackRightCooldown;
+        }
+
+        if (isGrounded && CanAttackTailWhip && attackTailWhipAvailable && pc.GameControls.AttackTailWhip.ReadValue<float>() == 1f)
+        {
+            ChangeAnimationState(PLAYER_TAIL_WHIP);
+            isAttacking = true;
+            Invoke("StopAttacking", attackTailWhipLength);
+            attackTailWhipAvailable = false;
+            attackTailWhipCooldown = AttackTailWhipCooldown;
+        }
+
+        if (isGrounded && CanAttackKick && attackKickAvailable && pc.GameControls.AttackKick.ReadValue<float>() == 1f)
+        {
+            ChangeAnimationState(PLAYER_KICK);
+            isAttacking = true;
+            Invoke("StopAttacking", attackKickLength);
+            attackKickAvailable = false;
+            attackKickCooldown = AttackKickCooldown;
+        }
+
+        if (isGrounded && CanAttackBiteForward && attackBiteForwardAvailable && pc.GameControls.AttackBiteForward.ReadValue<float>() == 1f)
+        {
+            ChangeAnimationState(PLAYER_BITE_FORWARD);
+            isAttacking = true;
+            Invoke("StopAttacking", attackBiteForwardLength);
+            attackBiteForwardAvailable = false;
+            attackBiteForwardCooldown = AttackBiteForwardCooldown;
+        }
+
+        if (isGrounded && CanAttackBiteDown && attackBiteDownAvailable && pc.GameControls.AttackBiteDown.ReadValue<float>() == 1f)
+        {
+            ChangeAnimationState(PLAYER_BITE_DOWN);
+            isAttacking = true;
+            Invoke("StopAttacking", attackBiteDownLength);
+            attackBiteDownAvailable = false;
+            attackBiteDownCooldown = AttackBiteDownCooldown;
+        }
+    }
+
+    void StopAttacking()
+    {
+        isAttacking = false;
     }
 
     #endregion

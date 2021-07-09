@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Attack",
+                    "name": "AttackLeft",
                     "type": "Button",
                     "id": "4c171fb5-00ce-4830-a00f-539f7d05452b",
                     "expectedControlType": "Button",
@@ -46,7 +46,15 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Melee Attack",
+                    "name": "AttackRight",
+                    "type": "Button",
+                    "id": "b5fde96b-f9c6-4cd0-b14e-186420856b99",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AttackTailWhip",
                     "type": "Button",
                     "id": "4a6e9f36-cb82-4f30-9673-9c3933a8b6ca",
                     "expectedControlType": "Button",
@@ -54,17 +62,33 @@
                     "interactions": ""
                 },
                 {
-                    "name": "DashRight",
+                    "name": "AttackKick",
                     "type": "Button",
-                    "id": "3127f792-9bc7-46bb-94bc-6b1b90579377",
+                    "id": "e4e683d7-aaa6-4ce5-a4d1-78c659508e0f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "DashLeft",
+                    "name": "AttackBiteForward",
                     "type": "Button",
-                    "id": "69fa0b3c-efdb-4aa8-91ac-e9c67cf2a6ff",
+                    "id": "490e70be-9e58-48d2-9f60-8d57949d1d28",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AttackBiteDown",
+                    "type": "Button",
+                    "id": "f0d46b44-1e91-41be-9d31-3c67632886ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "3127f792-9bc7-46bb-94bc-6b1b90579377",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -221,23 +245,12 @@
                 },
                 {
                     "name": "",
-                    "id": "8c71729d-8055-482e-aa58-ddeb2cc5ec40",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Melee Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0cd55664-9604-4584-a07c-fba400397197",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Melee Attack",
+                    "action": "AttackTailWhip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -248,7 +261,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Melee Attack",
+                    "action": "AttackTailWhip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -281,7 +294,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "DashRight",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -292,29 +305,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "DashRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bdda9192-b409-4c3c-b48e-e3a95cb444ac",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "DashLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "374e5f24-6a6c-4a7c-9baf-9e79d3fa3f19",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "DashLeft",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -336,7 +327,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Attack",
+                    "action": "AttackLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -347,7 +338,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Attack",
+                    "action": "AttackLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -392,6 +383,50 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "GroundSlam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ef1d825-e1cf-47b0-9825-ab1cca5f2d1f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "AttackRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70a7762e-f10d-4605-9fbf-c13108de3790",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "AttackKick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82cc52cd-927f-471c-8342-778435bcac2b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "AttackBiteForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a037e3a5-7801-4f38-aafe-31347220abe5",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "AttackBiteDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
