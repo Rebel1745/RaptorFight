@@ -107,14 +107,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MousePosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""6feb6a3d-af11-4ed3-83f1-b894935f1d7a"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""GroundSlam"",
                     ""type"": ""Button"",
                     ""id"": ""0838a644-ca49-401b-b5bd-cb4f3bf0c227"",
@@ -324,17 +316,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e2b7ce75-ae2e-411d-8549-e7af6a27d8b0"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""MousePosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5ce837e8-d660-47c2-b392-53c13f9b084b"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -380,7 +361,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9da1a020-71fb-42c1-bdfc-20c89f7b171e"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -489,7 +470,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_GameControls_AttackBiteForward = m_GameControls.FindAction("AttackBiteForward", throwIfNotFound: true);
         m_GameControls_AttackBiteDown = m_GameControls.FindAction("AttackBiteDown", throwIfNotFound: true);
         m_GameControls_Dash = m_GameControls.FindAction("Dash", throwIfNotFound: true);
-        m_GameControls_MousePosition = m_GameControls.FindAction("MousePosition", throwIfNotFound: true);
         m_GameControls_GroundSlam = m_GameControls.FindAction("GroundSlam", throwIfNotFound: true);
     }
 
@@ -551,7 +531,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_GameControls_AttackBiteForward;
     private readonly InputAction m_GameControls_AttackBiteDown;
     private readonly InputAction m_GameControls_Dash;
-    private readonly InputAction m_GameControls_MousePosition;
     private readonly InputAction m_GameControls_GroundSlam;
     public struct GameControlsActions
     {
@@ -568,7 +547,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @AttackBiteForward => m_Wrapper.m_GameControls_AttackBiteForward;
         public InputAction @AttackBiteDown => m_Wrapper.m_GameControls_AttackBiteDown;
         public InputAction @Dash => m_Wrapper.m_GameControls_Dash;
-        public InputAction @MousePosition => m_Wrapper.m_GameControls_MousePosition;
         public InputAction @GroundSlam => m_Wrapper.m_GameControls_GroundSlam;
         public InputActionMap Get() { return m_Wrapper.m_GameControls; }
         public void Enable() { Get().Enable(); }
@@ -612,9 +590,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnDash;
-                @MousePosition.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMousePosition;
                 @GroundSlam.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnGroundSlam;
                 @GroundSlam.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnGroundSlam;
                 @GroundSlam.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnGroundSlam;
@@ -655,9 +630,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @MousePosition.started += instance.OnMousePosition;
-                @MousePosition.performed += instance.OnMousePosition;
-                @MousePosition.canceled += instance.OnMousePosition;
                 @GroundSlam.started += instance.OnGroundSlam;
                 @GroundSlam.performed += instance.OnGroundSlam;
                 @GroundSlam.canceled += instance.OnGroundSlam;
@@ -696,7 +668,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnAttackBiteForward(InputAction.CallbackContext context);
         void OnAttackBiteDown(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnMousePosition(InputAction.CallbackContext context);
         void OnGroundSlam(InputAction.CallbackContext context);
     }
 }

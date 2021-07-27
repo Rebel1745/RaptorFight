@@ -94,14 +94,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MousePosition",
-                    "type": "Value",
-                    "id": "6feb6a3d-af11-4ed3-83f1-b894935f1d7a",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "GroundSlam",
                     "type": "Button",
                     "id": "0838a644-ca49-401b-b5bd-cb4f3bf0c227",
@@ -311,17 +303,6 @@
                 },
                 {
                     "name": "",
-                    "id": "e2b7ce75-ae2e-411d-8549-e7af6a27d8b0",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "MousePosition",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5ce837e8-d660-47c2-b392-53c13f9b084b",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -367,7 +348,7 @@
                 {
                     "name": "",
                     "id": "9da1a020-71fb-42c1-bdfc-20c89f7b171e",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",

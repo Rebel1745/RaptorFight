@@ -204,8 +204,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 601102348}
-  - component: {fileID: 601102349}
   - component: {fileID: 601102350}
+  - component: {fileID: 601102349}
+  - component: {fileID: 601102351}
+  - component: {fileID: 601102355}
+  - component: {fileID: 601102358}
+  - component: {fileID: 601102354}
+  - component: {fileID: 601102357}
+  - component: {fileID: 601102356}
+  - component: {fileID: 601102352}
+  - component: {fileID: 601102353}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -241,6 +249,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c22fe71ecc3ccf4285d31f253176165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 601102350}
+  playerInputAttack: {fileID: 601102352}
+  playerInputGroundSlam: {fileID: 601102353}
+  playerInputDash: {fileID: 601102354}
+  playerInputJump: {fileID: 601102357}
+  playerInputLeap: {fileID: 601102356}
+  playerInputMove: {fileID: 601102355}
+  playerInputSprint: {fileID: 601102358}
   CanGroundSlam: 0
   CanDash: 1
   CanSprint: 1
@@ -253,39 +269,12 @@ MonoBehaviour:
   CanAttackBiteForward: 1
   CanAttackBiteDown: 1
   CanLeap: 1
-  Speed: 2
-  SprintSpeed: 10
-  JumpForce: 10
-  NumberOfJumps: 0
-  jumpsLeft: 0
-  FallMultiplier: 2.5
-  LowJumpMultiplier: 2
   GroundCheck: {fileID: 241876356}
   CheckRadius: 0.1
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 256
   GroundedRememberTime: 0.1
-  LeapHeight: 3
-  LeapDuration: 1
-  MaxLeapDistance: 20
-  WhatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 512
-  GroundSlamSpeed: 20
-  PreSlamHoverTime: 1
-  SlamMinHeight: 2
-  DashSpeed: 50
-  NumberOfDashes: 1
-  DashDuration: 0.1
-  FlyUpForce: 0.5
-  FlyingCooldownTime: 0.1
-  AttackRightCooldown: 1
-  AttackLeftCooldown: 1
-  AttackTailWhipCooldown: 1
-  AttackKickCooldown: 1
-  AttackBiteForwardCooldown: 1
-  AttackBiteDownCooldown: 1
 --- !u!54 &601102350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -302,6 +291,346 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &601102351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601102347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f5eeb7d1ee3577240a51d0d8f9e61f95, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102355}
+        m_TargetAssemblyTypeName: PlayerInputMove, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d9ff1bff-447e-4a21-ad39-9472b957517f
+    m_ActionName: GameControls/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102358}
+        m_TargetAssemblyTypeName: PlayerInputSprint, Assembly-CSharp
+        m_MethodName: Sprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b7f41d11-8dde-47b1-a0d1-0b7ac6fcfb18
+    m_ActionName: GameControls/Sprint[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102357}
+        m_TargetAssemblyTypeName: PlayerInputJump, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 11f1c626-42d1-4fe4-844e-65e02bfef468
+    m_ActionName: GameControls/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102356}
+        m_TargetAssemblyTypeName: PlayerInputLeap, Assembly-CSharp
+        m_MethodName: Leap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6a9dffb3-d324-4efd-9efc-f0b53b799cbc
+    m_ActionName: GameControls/Leap[/Keyboard/ctrl]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102352}
+        m_TargetAssemblyTypeName: PlayerInputAttack, Assembly-CSharp
+        m_MethodName: AttackLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4c171fb5-00ce-4830-a00f-539f7d05452b
+    m_ActionName: GameControls/AttackLeft[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102352}
+        m_TargetAssemblyTypeName: PlayerInputAttack, Assembly-CSharp
+        m_MethodName: AttackRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b5fde96b-f9c6-4cd0-b14e-186420856b99
+    m_ActionName: GameControls/AttackRight[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102352}
+        m_TargetAssemblyTypeName: PlayerInputAttack, Assembly-CSharp
+        m_MethodName: AttackTailWhip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4a6e9f36-cb82-4f30-9673-9c3933a8b6ca
+    m_ActionName: GameControls/AttackTailWhip[/Mouse/backButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102352}
+        m_TargetAssemblyTypeName: PlayerInputAttack, Assembly-CSharp
+        m_MethodName: AttackKick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e4e683d7-aaa6-4ce5-a4d1-78c659508e0f
+    m_ActionName: GameControls/AttackKick[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102352}
+        m_TargetAssemblyTypeName: PlayerInputAttack, Assembly-CSharp
+        m_MethodName: AttackBiteForward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 490e70be-9e58-48d2-9f60-8d57949d1d28
+    m_ActionName: GameControls/AttackBiteForward[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102352}
+        m_TargetAssemblyTypeName: PlayerInputAttack, Assembly-CSharp
+        m_MethodName: AttackBiteDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f0d46b44-1e91-41be-9d31-3c67632886ff
+    m_ActionName: GameControls/AttackBiteDown[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102354}
+        m_TargetAssemblyTypeName: PlayerInputDash, Assembly-CSharp
+        m_MethodName: Dash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3127f792-9bc7-46bb-94bc-6b1b90579377
+    m_ActionName: GameControls/Dash[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601102353}
+        m_TargetAssemblyTypeName: PlayerInputGroundSlam, Assembly-CSharp
+        m_MethodName: AttackGroundSlam
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0838a644-ca49-401b-b5bd-cb4f3bf0c227
+    m_ActionName: GameControls/GroundSlam[/Keyboard/c]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: GameControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &601102352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601102347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf4ecd7b03cc964caa10ef4e032dc25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raptorController: {fileID: 601102349}
+  isAttacking: 0
+  AttackRightCooldown: 1
+  AttackLeftCooldown: 1
+  AttackTailWhipCooldown: 1
+  AttackKickCooldown: 1
+  AttackBiteForwardCooldown: 1
+  AttackBiteDownCooldown: 1
+--- !u!114 &601102353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601102347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6470fd3ef1241468877e22b6933ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raptorController: {fileID: 601102349}
+  GroundSlamSpeed: 20
+  PreSlamHoverTime: 1
+  SlamMinHeight: 2
+  isGroundSlam: 0
+--- !u!114 &601102354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601102347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a17acc357730a7428c9e229a4e9b9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raptorController: {fileID: 601102349}
+  DashSpeed: 50
+  NumberOfDashes: 1
+  DashDuration: 0.1
+--- !u!114 &601102355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601102347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e950c7e7557f36942b2f076f978ef1de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raptorController: {fileID: 601102349}
+  WalkSpeed: 3
+--- !u!114 &601102356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601102347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2452f9f3c674c244bcc20a9be25842a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raptorController: {fileID: 601102349}
+  LeapHeight: 5
+  LeapDuration: 2
+  MaxLeapDistance: 10
+  WhatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!114 &601102357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601102347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4ddd7c8c2935249a14f052b6a3c26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raptorController: {fileID: 601102349}
+  JumpForce: 5
+  NumberOfJumps: 0
+  jumpsLeft: 0
+  FallMultiplier: 2.5
+  LowJumpMultiplier: 2
+--- !u!114 &601102358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601102347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc93d4450f95e243b73fa7e5a7a49e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raptorController: {fileID: 601102349}
+  SprintSpeed: 10
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,159 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerInputAttack : MonoBehaviour
+{
+    [SerializeField] RaptorController raptorController;
+
+    [Header("Attacks")]
+    public bool isAttacking = false;
+    bool attackRightAvailable = false;
+    public float AttackRightCooldown = 1f;
+    float attackRightCooldown = 0f;
+    float attackRightLength = 0.3f;
+    bool attackLeftAvailable = false;
+    public float AttackLeftCooldown = 1f;
+    float attackLeftCooldown = 0f;
+    float attackLeftLength = 0.3f;
+    bool attackTailWhipAvailable = false;
+    public float AttackTailWhipCooldown = 1f;
+    float attackTailWhipCooldown = 0f;
+    float attackTailWhipLength = 0.3f;
+    bool attackKickAvailable = false;
+    public float AttackKickCooldown = 1f;
+    float attackKickCooldown = 0f;
+    float attackKickLength = 0.3f;
+    bool attackBiteForwardAvailable = false;
+    public float AttackBiteForwardCooldown = 1f;
+    float attackBiteForwardCooldown = 0f;
+    float attackBiteForwardLength = 0.3f;
+    bool attackBiteDownAvailable = false;
+    public float AttackBiteDownCooldown = 1f;
+    float attackBiteDownCooldown = 0f;
+    float attackBiteDownLength = 0.3f;
+
+    void Update()
+    {
+        UpdateAttackCountdowns();
+    }
+
+    #region Attacking
+    void UpdateAttackCountdowns()
+    {
+        if (!attackRightAvailable)
+            attackRightCooldown -= Time.deltaTime;
+
+        if (attackRightCooldown <= 0f)
+            attackRightAvailable = true;
+
+        if (!attackLeftAvailable)
+            attackLeftCooldown -= Time.deltaTime;
+
+        if (attackLeftCooldown <= 0f)
+            attackLeftAvailable = true;
+
+        if (!attackTailWhipAvailable)
+            attackTailWhipCooldown -= Time.deltaTime;
+
+        if (attackTailWhipCooldown <= 0f)
+            attackTailWhipAvailable = true;
+
+        if (!attackKickAvailable)
+            attackKickCooldown -= Time.deltaTime;
+
+        if (attackKickCooldown <= 0f)
+            attackKickAvailable = true;
+
+        if (!attackBiteForwardAvailable)
+            attackBiteForwardCooldown -= Time.deltaTime;
+
+        if (attackBiteForwardCooldown <= 0f)
+            attackBiteForwardAvailable = true;
+
+        if (!attackBiteDownAvailable)
+            attackBiteDownCooldown -= Time.deltaTime;
+
+        if (attackBiteDownCooldown <= 0f)
+            attackBiteDownAvailable = true;
+    }
+
+    public void AttackLeft()
+    {
+        if (raptorController.isGrounded && raptorController.CanAttackLeft && attackLeftAvailable)
+        {
+            raptorController.ChangeAnimationState(raptorController.PLAYER_SLASH_LEFT);
+            isAttacking = true;
+            attackLeftAvailable = false;
+            Invoke("StopAttacking", attackLeftLength);
+            attackLeftCooldown = AttackLeftCooldown;
+        }
+    }
+
+    public void AttackRight()
+    {
+        if (raptorController.isGrounded && raptorController.CanAttackRight && attackRightAvailable)
+        {
+            raptorController.ChangeAnimationState(raptorController.PLAYER_SLASH_RIGHT);
+            isAttacking = true;
+            attackRightAvailable = false;
+            Invoke("StopAttacking", attackRightLength);
+            attackRightCooldown = AttackRightCooldown;
+        }
+    }
+
+    public void AttackTailWhip()
+    {
+        if (raptorController.isGrounded && raptorController.CanAttackTailWhip && attackTailWhipAvailable)
+        {
+            raptorController.ChangeAnimationState(raptorController.PLAYER_TAIL_WHIP);
+            isAttacking = true;
+            Invoke("StopAttacking", attackTailWhipLength);
+            attackTailWhipAvailable = false;
+            attackTailWhipCooldown = AttackTailWhipCooldown;
+        }
+    }
+
+    public void AttackKick()
+    {
+        if (raptorController.isGrounded && raptorController.CanAttackKick && attackKickAvailable)
+        {
+            raptorController.ChangeAnimationState(raptorController.PLAYER_KICK);
+            isAttacking = true;
+            Invoke("StopAttacking", attackKickLength);
+            attackKickAvailable = false;
+            attackKickCooldown = AttackKickCooldown;
+        }
+    }
+
+    public void AttackBiteForward()
+    {
+        if (raptorController.isGrounded && raptorController.CanAttackBiteForward && attackBiteForwardAvailable)
+        {
+            raptorController.ChangeAnimationState(raptorController.PLAYER_BITE_FORWARD);
+            isAttacking = true;
+            Invoke("StopAttacking", attackBiteForwardLength);
+            attackBiteForwardAvailable = false;
+            attackBiteForwardCooldown = AttackBiteForwardCooldown;
+        }
+    }
+
+    public void AttackBiteDown()
+    {
+        if (raptorController.isGrounded && raptorController.CanAttackBiteDown && attackBiteDownAvailable)
+        {
+            raptorController.ChangeAnimationState(raptorController.PLAYER_BITE_DOWN);
+            isAttacking = true;
+            Invoke("StopAttacking", attackBiteDownLength);
+            attackBiteDownAvailable = false;
+            attackBiteDownCooldown = AttackBiteDownCooldown;
+        }
+    }
+
+    void StopAttacking()
+    {
+        isAttacking = false;
+    }
+
+    #endregion
+}
