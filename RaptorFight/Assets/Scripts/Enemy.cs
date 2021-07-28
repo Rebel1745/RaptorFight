@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
 
     private Renderer enemyMat;
 
+    [SerializeField] internal Rigidbody rb;
+    [SerializeField] internal EnemyKnockback enemyKnockback;
+
     // Start is called before the first frame update
     void Start()
     {

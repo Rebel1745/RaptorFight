@@ -8,6 +8,7 @@ public class PlayerInputAttack : MonoBehaviour
 
     [Header("Attacks")]
     public bool isAttacking = false;
+    public LayerMask WhatIsEnemy;
     bool attackRightAvailable = false;
     public float AttackRightCooldown = 1f;
     float attackRightCooldown = 0f;
@@ -24,6 +25,9 @@ public class PlayerInputAttack : MonoBehaviour
     public float AttackKickCooldown = 1f;
     float attackKickCooldown = 0f;
     float attackKickLength = 0.3f;
+    public Transform AttackKickPoint;
+    public float AttackKickLength = 0.1f; // length of ray that checks for enemy in front of kick point
+    public float AttackKickDistance = 5f; // default distance to kick enemy back
     bool attackBiteForwardAvailable = false;
     public float AttackBiteForwardCooldown = 1f;
     float attackBiteForwardCooldown = 0f;
@@ -123,6 +127,12 @@ public class PlayerInputAttack : MonoBehaviour
             Invoke("StopAttacking", attackKickLength);
             attackKickAvailable = false;
             attackKickCooldown = AttackKickCooldown;
+
+            // check for enemy and kick it
+            if(Physics.Raycast(AttackKickPoint.position, Vector3.right, out RaycastHit hit, AttackKickDistance, WhatIsEnemy))
+            {
+                hit.transform.GetComponent<EnemyKnockback>().Knockback(Vector3.right);
+            }
         }
     }
 

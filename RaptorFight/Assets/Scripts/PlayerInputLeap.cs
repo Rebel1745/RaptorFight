@@ -16,7 +16,6 @@ public class PlayerInputLeap : MonoBehaviour
     private Vector3 leapStartPos = Vector3.zero;
     private Vector3 leapEndPos = Vector3.zero;
     private List<GameObject> leapTargets;
-    public LayerMask WhatIsEnemy;
 
     void Start()
     {
@@ -39,7 +38,7 @@ public class PlayerInputLeap : MonoBehaviour
             // clear previous targets
             leapTargets.Clear();
             // find possible leap targets
-            Collider[] targets = Physics.OverlapSphere(transform.position, MaxLeapDistance, WhatIsEnemy);
+            Collider[] targets = Physics.OverlapSphere(transform.position, MaxLeapDistance, raptorController.playerInputAttack.WhatIsEnemy);
             foreach (Collider c in targets)
             {
                 if (c.GetComponent<Enemy>().EnemyState == Enemy.ENEMY_STATE.Floored)
@@ -65,7 +64,7 @@ public class PlayerInputLeap : MonoBehaviour
 
                 leapStartPos = transform.position;
                 leapEndPos = leapTarget.transform.position;
-                Debug.Log(transform.position.x + " - " + leapTarget.transform.position.x + " = " + (transform.position.x - leapTarget.transform.position.x));
+
                 if (transform.position.x - leapTarget.transform.position.x < 0 && !raptorController.playerInputMove.isFacingRight)
                 {
                     raptorController.Flip();
@@ -76,10 +75,10 @@ public class PlayerInputLeap : MonoBehaviour
                 }
                 leapTarget.GetComponent<Enemy>().ChangeState(Enemy.ENEMY_STATE.Dead);
             }
-            else
+            /*else
             {
                 Debug.Log("No leap target");
-            }
+            }*/
         }
         
     }

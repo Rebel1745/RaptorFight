@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8593829869160273785}
   - component: {fileID: 8593829869160273765}
   - component: {fileID: 5728848977507660250}
+  - component: {fileID: -2380977737262839690}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -128,3 +129,21 @@ MonoBehaviour:
   EnemyState: 0
   FlooredMat: {fileID: 2100000, guid: 5021705e493470f4ab6e2aef766c5618, type: 2}
   DeadMat: {fileID: 2100000, guid: d88ba1dd675377b4cbe42e6ef2ee375c, type: 2}
+  rb: {fileID: 8593829869160273765}
+  enemyKnockback: {fileID: 0}
+--- !u!114 &-2380977737262839690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593829869160273790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370639fd9d33912448597a7739572707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 5728848977507660250}
+  KnockbackMultiplier: 1
+  KnockbackSpeed: 50
+  KnockbackDuration: 0.1

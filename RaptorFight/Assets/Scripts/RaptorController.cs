@@ -27,8 +27,8 @@ public class RaptorController : MonoBehaviour
         pc.Disable();
     }
     
-    public Rigidbody rb;
-    public PlayerControls pc;
+    internal Rigidbody rb;
+    internal PlayerControls pc;
     Animator anim;
 
     [SerializeField] internal PlayerInputAttack playerInputAttack;
@@ -111,8 +111,9 @@ public class RaptorController : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, playerInputLeap.MaxLeapDistance);
-        
-        Debug.DrawLine(GroundCheck.position, Vector3.down, Color.red, CheckRadius);
+
+        Debug.DrawRay(GroundCheck.position, Vector3.down * CheckRadius, Color.green);
+        Debug.DrawRay(playerInputAttack.AttackKickPoint.position, Vector3.right * playerInputAttack.AttackKickLength, Color.red);
     }
 
     void PrintList(List<GameObject> l)
