@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -104,7 +104,17 @@ public class RaptorController : MonoBehaviour
         playerInputMove.isFacingRight = !playerInputMove.isFacingRight;
 
         transform.Rotate(0f, 180f, 0f);
-    }   
+    }
+
+    // TODO: Move to utilities class so its available everywhere
+    public Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
+    {
+        Func<float, float> f = x => -4 * height * x * x + 4 * height * x;
+
+        var mid = Vector3.Lerp(start, end, t);
+
+        return new Vector3(mid.x, f(t) + Mathf.Lerp(start.y, end.y, t), mid.z);
+    }
 
     #region Debug
     private void OnDrawGizmos()
@@ -112,8 +122,13 @@ public class RaptorController : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, playerInputLeap.MaxLeapDistance);
 
+
+        // duplicated code
+        Vector3 dir = playerInputMove.isFacingRight ? Vector3.right : Vector3.left;
+
         Debug.DrawRay(GroundCheck.position, Vector3.down * CheckRadius, Color.green);
-        Debug.DrawRay(playerInputAttack.AttackKickPoint.position, Vector3.right * playerInputAttack.AttackKickLength, Color.red);
+        Debug.DrawRay(playerInputAttack.AttackKickPoint.position, dir * playerInputAttack.AttackKickCheckLength, Color.red);
+        Debug.DrawRay(playerInputAttack.AttackTailWhipPoint.position, dir * playerInputAttack.AttackTailWhipCheckLength, Color.red);
     }
 
     void PrintList(List<GameObject> l)

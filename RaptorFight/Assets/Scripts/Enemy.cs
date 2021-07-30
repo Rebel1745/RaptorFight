@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] internal Rigidbody rb;
     [SerializeField] internal EnemyKnockback enemyKnockback;
+    [SerializeField] internal EnemyKnockup enemyKnockup;
+
+    public float KnockMultiplier = 1.0f;
 
     // Start is called before the first frame update
     void Start()

@@ -21,12 +21,15 @@ public class PlayerInputAttack : MonoBehaviour
     public float AttackTailWhipCooldown = 1f;
     float attackTailWhipCooldown = 0f;
     float attackTailWhipLength = 0.3f;
+    public Transform AttackTailWhipPoint;
+    public float AttackTailWhipCheckLength = 1f; // length of ray that checks for enemy in front of knockup point
+    public float AttackTailWhipDistance = 3f; // default distance knock enemy back and up
     bool attackKickAvailable = false;
     public float AttackKickCooldown = 1f;
     float attackKickCooldown = 0f;
     float attackKickLength = 0.3f;
     public Transform AttackKickPoint;
-    public float AttackKickLength = 0.1f; // length of ray that checks for enemy in front of kick point
+    public float AttackKickCheckLength = 0.1f; // length of ray that checks for enemy in front of kick point
     public float AttackKickDistance = 5f; // default distance to kick enemy back
     bool attackBiteForwardAvailable = false;
     public float AttackBiteForwardCooldown = 1f;
@@ -115,6 +118,15 @@ public class PlayerInputAttack : MonoBehaviour
             Invoke("StopAttacking", attackTailWhipLength);
             attackTailWhipAvailable = false;
             attackTailWhipCooldown = AttackTailWhipCooldown;
+
+            // duplicated code
+            Vector3 dir = raptorController.playerInputMove.isFacingRight ? Vector3.right : Vector3.left;
+
+            // check for enemy and knock it up
+            if (Physics.Raycast(AttackTailWhipPoint.position, dir, out RaycastHit hit, AttackTailWhipCheckLength, WhatIsEnemy))
+            {
+                hit.transform.GetComponent<EnemyKnockup>().Knockup(dir * AttackTailWhipDistance);
+            }
         }
     }
 
@@ -128,10 +140,13 @@ public class PlayerInputAttack : MonoBehaviour
             attackKickAvailable = false;
             attackKickCooldown = AttackKickCooldown;
 
+            // duplicated code
+            Vector3 dir = raptorController.playerInputMove.isFacingRight ? Vector3.right : Vector3.left;
+
             // check for enemy and kick it
-            if(Physics.Raycast(AttackKickPoint.position, Vector3.right, out RaycastHit hit, AttackKickDistance, WhatIsEnemy))
+            if (Physics.Raycast(AttackKickPoint.position, dir, out RaycastHit hit, AttackKickCheckLength, WhatIsEnemy))
             {
-                hit.transform.GetComponent<EnemyKnockback>().Knockback(Vector3.right);
+                hit.transform.GetComponent<EnemyKnockback>().Knockback(dir);
             }
         }
     }

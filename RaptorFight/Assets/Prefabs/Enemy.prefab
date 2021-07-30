@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8593829869160273765}
   - component: {fileID: 5728848977507660250}
   - component: {fileID: -2380977737262839690}
+  - component: {fileID: -31857873251674255}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -131,6 +132,8 @@ MonoBehaviour:
   DeadMat: {fileID: 2100000, guid: d88ba1dd675377b4cbe42e6ef2ee375c, type: 2}
   rb: {fileID: 8593829869160273765}
   enemyKnockback: {fileID: 0}
+  enemyKnockup: {fileID: 0}
+  KnockMultiplier: 1
 --- !u!114 &-2380977737262839690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +147,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 5728848977507660250}
-  KnockbackMultiplier: 1
   KnockbackSpeed: 50
   KnockbackDuration: 0.1
+--- !u!114 &-31857873251674255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593829869160273790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505c64933311ebc489bfa2d97b7aec73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 5728848977507660250}
+  raptorController: {fileID: 0}
+  KnockupHeight: 3
+  KnockupDuration: 1
+  KnockupDistance: 2

@@ -5,14 +5,13 @@ using UnityEngine;
 public class EnemyKnockback : MonoBehaviour
 {
     [SerializeField] internal Enemy enemy;
-
-    public float KnockbackMultiplier = 1.0f;
+    
     public float KnockbackSpeed = 50f;
     public float KnockbackDuration = 0.1f;
 
     public void Knockback(Vector3 dir)
     {
-        enemy.rb.velocity = dir * KnockbackSpeed;
+        enemy.rb.velocity = dir * KnockbackSpeed * enemy.KnockMultiplier;
 
         Invoke("StopKnockback", KnockbackDuration);
     }
