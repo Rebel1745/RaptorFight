@@ -9,7 +9,7 @@ public class PlayerInputSprint : MonoBehaviour
 
     public void Sprint(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && raptorController.isGrounded)
         {
             if (raptorController.CanSprint)
                 raptorController.playerInputMove.currentSpeed = SprintSpeed;

@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputLeap : MonoBehaviour
 {
@@ -27,10 +27,10 @@ public class PlayerInputLeap : MonoBehaviour
         CheckLeaping();
     }
 
-    public void Leap()
+    public void Leap(InputAction.CallbackContext context)
     {
         
-        if (!isLeaping && raptorController.CanLeap && canLeap)
+        if (context.performed && !isLeaping && raptorController.CanLeap && canLeap)
         {
             GameObject leapTarget = null;
             float leapTargetDistance = Mathf.Infinity;
@@ -73,7 +73,7 @@ public class PlayerInputLeap : MonoBehaviour
                 {
                     raptorController.Flip();
                 }
-                leapTarget.GetComponent<Enemy>().ChangeState(Enemy.ENEMY_STATE.Dead);
+                leapTarget.GetComponent<EnemyHealth>().ChangeHealth(-1);
             }
             /*else
             {
@@ -103,6 +103,7 @@ public class PlayerInputLeap : MonoBehaviour
         {
             isLeaping = false;
             canLeap = true;
+            raptorController.ChangeAnimationState(raptorController.PLAYER_BITE_DOWN);
         }        
     }
 }

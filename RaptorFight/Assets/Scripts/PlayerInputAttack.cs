@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputAttack : MonoBehaviour
 {
@@ -85,9 +84,9 @@ public class PlayerInputAttack : MonoBehaviour
             attackBiteDownAvailable = true;
     }
 
-    public void AttackLeft()
+    public void AttackLeft(InputAction.CallbackContext context)
     {
-        if (raptorController.isGrounded && raptorController.CanAttackLeft && attackLeftAvailable)
+        if (context.performed && raptorController.isGrounded && raptorController.CanAttackLeft && attackLeftAvailable)
         {
             raptorController.ChangeAnimationState(raptorController.PLAYER_SLASH_LEFT);
             isAttacking = true;
@@ -97,9 +96,9 @@ public class PlayerInputAttack : MonoBehaviour
         }
     }
 
-    public void AttackRight()
+    public void AttackRight(InputAction.CallbackContext context)
     {
-        if (raptorController.isGrounded && raptorController.CanAttackRight && attackRightAvailable)
+        if (context.performed && raptorController.isGrounded && raptorController.CanAttackRight && attackRightAvailable)
         {
             raptorController.ChangeAnimationState(raptorController.PLAYER_SLASH_RIGHT);
             isAttacking = true;
@@ -109,9 +108,9 @@ public class PlayerInputAttack : MonoBehaviour
         }
     }
 
-    public void AttackTailWhip()
+    public void AttackTailWhip(InputAction.CallbackContext context)
     {
-        if (raptorController.isGrounded && raptorController.CanAttackTailWhip && attackTailWhipAvailable)
+        if (context.performed && raptorController.isGrounded && raptorController.CanAttackTailWhip && attackTailWhipAvailable)
         {
             raptorController.ChangeAnimationState(raptorController.PLAYER_TAIL_WHIP);
             isAttacking = true;
@@ -130,9 +129,9 @@ public class PlayerInputAttack : MonoBehaviour
         }
     }
 
-    public void AttackKick()
+    public void AttackKick(InputAction.CallbackContext context)
     {
-        if (raptorController.isGrounded && raptorController.CanAttackKick && attackKickAvailable)
+        if (context.performed && raptorController.isGrounded && raptorController.CanAttackKick && attackKickAvailable)
         {
             raptorController.ChangeAnimationState(raptorController.PLAYER_KICK);
             isAttacking = true;
@@ -151,9 +150,9 @@ public class PlayerInputAttack : MonoBehaviour
         }
     }
 
-    public void AttackBiteForward()
+    public void AttackBiteForward(InputAction.CallbackContext context)
     {
-        if (raptorController.isGrounded && raptorController.CanAttackBiteForward && attackBiteForwardAvailable)
+        if (context.performed && raptorController.isGrounded && raptorController.CanAttackBiteForward && attackBiteForwardAvailable)
         {
             raptorController.ChangeAnimationState(raptorController.PLAYER_BITE_FORWARD);
             isAttacking = true;
@@ -163,9 +162,9 @@ public class PlayerInputAttack : MonoBehaviour
         }
     }
 
-    public void AttackBiteDown()
+    public void AttackBiteDown(InputAction.CallbackContext context)
     {
-        if (raptorController.isGrounded && raptorController.CanAttackBiteDown && attackBiteDownAvailable)
+        if (context.performed && raptorController.isGrounded && raptorController.CanAttackBiteDown && attackBiteDownAvailable)
         {
             raptorController.ChangeAnimationState(raptorController.PLAYER_BITE_DOWN);
             isAttacking = true;

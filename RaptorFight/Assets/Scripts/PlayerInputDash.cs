@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputDash : MonoBehaviour
 {
@@ -24,9 +23,9 @@ public class PlayerInputDash : MonoBehaviour
         CheckDashing();
     }
 
-    public void Dash()
+    public void Dash(InputAction.CallbackContext context)
     {
-        if (raptorController.CanDash && dashesLeft > 0 && !isDashing)
+        if (context.performed && raptorController.CanDash && dashesLeft > 0 && !isDashing)
         {
             isDashing = true;
             Vector2 dir;
@@ -34,6 +33,8 @@ public class PlayerInputDash : MonoBehaviour
             raptorController.rb.velocity = dir * DashSpeed;
             dashesLeft--;
 
+            // disable other movement when dashing
+            raptorController.playerInputMove.DisableMovementForTime(DashDuration);
             Invoke("StopDash", DashDuration);
         }
     }

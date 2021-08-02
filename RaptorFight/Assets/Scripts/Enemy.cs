@@ -5,9 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public enum ENEMY_STATE { Alive, Floored, Dead }
+    public enum ENEMY_STATE { Alive, Vulnerable, Floored, Dead }
     public ENEMY_STATE EnemyState = ENEMY_STATE.Alive;
 
+    public Material AliveMat;
+    public Material VulnerableMat;
     public Material FlooredMat;
     public Material DeadMat;
 
@@ -16,6 +18,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] internal Rigidbody rb;
     [SerializeField] internal EnemyKnockback enemyKnockback;
     [SerializeField] internal EnemyKnockup enemyKnockup;
+    [SerializeField] internal EnemyHealth enemyHealth;
 
     public float KnockMultiplier = 1.0f;
 
@@ -23,27 +26,37 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         // just for testing purposes
-        EnemyState = ENEMY_STATE.Floored;
+        //EnemyState = ENEMY_STATE.Alive;
         enemyMat = GetComponent<Renderer>();
-        enemyMat.sharedMaterial = FlooredMat;
+        enemyHealth.ChangeHealth(0);
+        //enemyMat.sharedMaterial = AliveMat;
     }
 
     public void ChangeState(ENEMY_STATE e)
     {
-        EnemyState = e;
-
-        switch (e)
+        if(EnemyState != e)
         {
-            case ENEMY_STATE.Floored:
-                enemyMat.sharedMaterial = FlooredMat;
-                break;
-            case ENEMY_STATE.Dead:
-                enemyMat.sharedMaterial = DeadMat;
-                break;
-        }
+            EnemyState = e;
 
-        if(e == ENEMY_STATE.Dead)
-            StartCoroutine(ChangeStateAfterTime(7.0f));
+            switch (e)
+            {
+                case ENEMY_STATE.Alive:
+                    enemyMat.sharedMaterial = AliveMat;
+                    break;
+                case ENEMY_STATE.Vulnerable:
+                    enemyMat.sharedMaterial = VulnerableMat;
+                    break;
+                case ENEMY_STATE.Floored:
+                    enemyMat.sharedMaterial = FlooredMat;
+                    break;
+                case ENEMY_STATE.Dead:
+                    enemyMat.sharedMaterial = DeadMat;
+                    break;
+            }
+        }       
+
+        /*if(e == ENEMY_STATE.Dead)
+            StartCoroutine(ChangeStateAfterTime(7.0f));*/
     }
 
     IEnumerator ChangeStateAfterTime(float t)

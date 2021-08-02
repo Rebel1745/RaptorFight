@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputJump : MonoBehaviour
 {
@@ -25,9 +24,9 @@ public class PlayerInputJump : MonoBehaviour
         CheckJumping();
     }
 
-    public void Jump()
+    public void Jump(InputAction.CallbackContext context)
     {
-        if (raptorController.CanJump && ((raptorController.groundedRemember > 0 && canJump) || jumpsLeft > 0))
+        if (context.performed && raptorController.CanJump && ((raptorController.groundedRemember > 0 && canJump) || jumpsLeft > 0))
         {
             isJumping = true;
             raptorController.groundedRemember = 0;
@@ -51,9 +50,6 @@ public class PlayerInputJump : MonoBehaviour
         {
             if (!canJump)
                 canJump = true;
-
-            if (raptorController.isGrounded)
-                isJumping = false;
         }
 
         // if jumping or falling, alter gravity to allow for medium and large jumps
@@ -65,6 +61,11 @@ public class PlayerInputJump : MonoBehaviour
         else if (raptorController.rb.velocity.y > 0 && raptorController.pc.GameControls.Jump.ReadValue<float>() == 0f)
         {
             raptorController.rb.velocity += Vector3.up * Physics.gravity.y * LowJumpMultiplier * Time.deltaTime;
+        }
+
+        if(isJumping && raptorController.rb.velocity.y == 0 && raptorController.isGrounded)
+        {
+            isJumping = false;
         }
     }
 }

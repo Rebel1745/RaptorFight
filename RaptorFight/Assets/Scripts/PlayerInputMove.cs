@@ -30,13 +30,13 @@ public class PlayerInputMove : MonoBehaviour
 
     void DoMovement()
     {
-        if (!canMove || raptorController.playerInputDash.isDashing || raptorController.playerInputGroundSlam.isGroundSlam)
+        if (!canMove)
             return;
 
         raptorController.rb.velocity = new Vector3(moveInput.x * currentSpeed, raptorController.rb.velocity.y, moveInput.y * currentSpeed);
         if (raptorController.isGrounded && !raptorController.playerInputJump.isJumping && !raptorController.playerInputAttack.isAttacking)
         {
-            if (Mathf.Abs(moveInput.x + moveInput.y) > 0)
+            if (Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y) > 0)
                 raptorController.ChangeAnimationState(raptorController.PLAYER_WALK);
             else
                 raptorController.ChangeAnimationState(raptorController.PLAYER_IDLE);
@@ -56,10 +56,20 @@ public class PlayerInputMove : MonoBehaviour
         }
     }
 
-    IEnumerator DisableMovement(float time)
+    public IEnumerator DisableMovementForTime(float time)
+    {
+        DisableMovement();
+        yield return new WaitForSeconds(time);
+        EnableMovement();
+    }
+
+    public void DisableMovement()
     {
         canMove = false;
-        yield return new WaitForSeconds(time);
+    }
+
+    public void EnableMovement()
+    {
         canMove = true;
     }
 }

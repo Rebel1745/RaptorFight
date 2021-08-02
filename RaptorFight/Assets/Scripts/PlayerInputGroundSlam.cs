@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputGroundSlam : MonoBehaviour
 {
@@ -18,9 +17,9 @@ public class PlayerInputGroundSlam : MonoBehaviour
         CheckGroundSlam();
     }
 
-    public void AttackGroundSlam()
+    public void AttackGroundSlam(InputAction.CallbackContext context)
     {
-        if(raptorController.CanGroundSlam && !isGroundSlam)
+        if(context.performed && raptorController.CanGroundSlam && !isGroundSlam)
         {
             if(!Physics.Raycast(raptorController.GroundCheck.position, Vector3.down, out RaycastHit hit, SlamMinHeight, raptorController.WhatIsGround))
         {
@@ -29,6 +28,9 @@ public class PlayerInputGroundSlam : MonoBehaviour
                 // stay static 
                 raptorController.rb.useGravity = false;
                 raptorController.rb.velocity = Vector3.zero;
+
+                // disable movement
+                raptorController.playerInputMove.DisableMovement();
                 Invoke("DoGroundSlam", PreSlamHoverTime);
             }
         }
@@ -36,8 +38,11 @@ public class PlayerInputGroundSlam : MonoBehaviour
 
     void CheckGroundSlam()
     {
-        if (raptorController.isGrounded)
+        if (raptorController.isGrounded) {
             isGroundSlam = false;
+            // re-enable movement now we have finished
+            raptorController.playerInputMove.EnableMovement();
+        }
     }
 
     void DoGroundSlam()
